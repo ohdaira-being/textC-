@@ -30,8 +30,8 @@ namespace Question1_1_2 {
         //PrintObjectsメソッドでは、二つのオブジェクトの内容（プロパティの値）をコンソールに表示するようにしてください。
         //なお、PrintObjectsメソッドは、Programクラスのメソッドとして定義してください。
         static void PrintObjects(MyClass vClass, MyStruct vStruct) {
-            Console.WriteLine("myClass：({0},{1})", vClass.X, vClass.Y);
-            Console.WriteLine("myStruct：({0},{1})", vStruct.X, vStruct.Y);
+            Console.WriteLine($"myClass：({vClass.X},{vClass.Y})");
+            Console.WriteLine($"myStruct：({vStruct.X},{vStruct.Y})");
             vClass.X *= 2;
             vClass.Y *= 2;
             vStruct.X *= 2;
@@ -41,14 +41,14 @@ namespace Question1_1_2 {
 
             //2.Mainメソッドで、PrintObjectsメソッドを呼び出すコードを書いてください。
             //MyClass、MyStructオブジェクトの値は、自由に決めて構いません。
-            MyClass myClass = new MyClass(2, 3);
-            MyStruct myStruct = new MyStruct(2, 3);
-            Program.PrintObjects(myClass, myStruct);
+            MyClass wMyClass = new MyClass(2, 3);
+            MyStruct wMyStruct = new MyStruct(2, 3);
+            Program.PrintObjects(wMyClass, wMyStruct);
 
             //3.PrintObjectsメソッド内で、それぞれのプロパティの値を2倍に変更するコード追加してください。
             //Mainメソッドでは、PrintObjects呼び出しの後に、MyClass、MyStructオブジェクトのプロパティの値をコンソールに表示するコードを加えてください。
-            Console.WriteLine("myClass：({0},{1})", myClass.X, myClass.Y);
-            Console.WriteLine("myStruct：({0},{1})", myStruct.X, myStruct.Y);
+            Console.WriteLine($"myClass：({wMyClass.X},{wMyClass.Y})");
+            Console.WriteLine($"myStruct：({wMyStruct.X},{wMyStruct.Y})");
 
             //4.上のコードを実行し、結果を確認してください。
             //そして、どうしてそのような結果になったのか、理由を説明してください。

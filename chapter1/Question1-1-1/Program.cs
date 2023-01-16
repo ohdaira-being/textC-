@@ -9,10 +9,10 @@ namespace IdiomProduct {
         public string Name { get; private set; }
         public int Price { get; private set; }
         //コンストラクタ
-        public Product(int code, string name, int price) {
-            this.Code = code;
-            this.Name = name;
-            this.Price = price;
+        public Product(int vCode, string vName, int vPrice) {
+            this.Code = vCode;
+            this.Name = vName;
+            this.Price = vPrice;
         }
 
         //消費税額を求める
@@ -33,10 +33,10 @@ namespace Question1_1_1 {
             //問題1.1
             //「1.1：クラス」で定義したProductクラスを使い、以下のコードを書いてください。
             //1.どら焼きオブジェクトを生成するコードを書いてください。この時の商品番号は"98"、商品価格は"210円"としてください。
-            Product dorayaki = new Product(98, "どら焼き", 210);
+            Product wDorayaki = new Product(98, "どら焼き", 210);
 
             //2.どら焼きオブジェクトの消費税額を求め、コンソールに出力するコードを書いてください。
-            Console.WriteLine(dorayaki.GetTax());
+            Console.WriteLine(wDorayaki.GetTax());
 
             //3.Productクラスが属する名前空間を別の名前空間に変更し、Mainメソッドから呼び出すようにしてください。
             //ただし、MainメソッドのあるProgramクラスの名前空間はそのままとしてください。

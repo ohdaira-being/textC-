@@ -6,12 +6,12 @@ namespace Question1_1_3 {
         public string Name { get; set; }
         public DateTime Birthday { get; set; }
         public int GetAge() {
-            DateTime today = DateTime.Today;
-            int age = today.Year - Birthday.Year;
-            if (today < Birthday.AddYears(age)) {
-                age--;
+            DateTime wToday = DateTime.Today;
+            int wAge = wToday.Year - Birthday.Year;
+            if (wToday < Birthday.AddYears(wAge)) {
+                wAge--;
             }
-            return age;
+            return wAge;
         }
     }
 
@@ -33,14 +33,14 @@ namespace Question1_1_3 {
         //2.Studentクラスのインスタンスを生成するコードを書いてください。
         //この時、全てのプロパティに値を設定してください。
         static void Main(string[] args) {
-            Student student = new Student ("大平", new DateTime(1900, 11, 19),100, 20) ;
+            Student wStudent = new Student ("大平", new DateTime(1900, 11, 19),100, 20) ;
 
             //3.2で生成したインスタンスの各プロパティの値をコンソールに出力するコードを書いてください。
-            Console.WriteLine($"{student.Name}は、{student.Birthday}生まれで{student.Grade}学年の{student.ClassNumber}組です。");
+            Console.WriteLine($"{wStudent.Name}は、{wStudent.Birthday}生まれで{wStudent.Grade}学年の{wStudent.ClassNumber}組です。");
 
             //4.2で生成したインスタンスをPerson型およびobject型の変数に代入できることを確認してください。
-            int age = student.GetAge();
-            Console.WriteLine(age);
+            int wAge = wStudent.GetAge();
+            Console.WriteLine(wAge);
             //122と表示された。
             //studentの変数がPersonで定義したメソッド内の変数に代入できることが確認できた。
             //また、Console.WriteLineで表示されたので、object型にも代入できることが確認できた。
