@@ -20,22 +20,21 @@ namespace Question3_1 {
     class Program {
         static void Main(string[] args) {
             //1.の回答
-            var number = new List<int> { 12, 87, 94, 14, 53, 20, 40, 35, 76, 91, 31, 17, 48 };
-            var exists = number.Exists(n => n % 8 == 0 || n % 9 == 0);
-            Console.WriteLine(exists);
+            var wNumbers = new List<int> { 12, 87, 94, 14, 53, 20, 40, 35, 76, 91, 31, 17, 48 };
+            Console.WriteLine(wNumbers.Exists(n => n % 8 == 0 || n % 9 == 0));
 
             //2.の回答
-            number.ForEach(s => Console.WriteLine(s / 2.0));
+            wNumbers.ForEach(s => Console.WriteLine(s / 2.0));
 
             //3. の回答
-            var more50num = number.Where(n => n >= 50);
-            foreach (var s in more50num)
+            foreach (int s in wNumbers.Where(n => n >= 50)) {
                 Console.WriteLine(s);
+            }
 
             //4. の回答
-            var twicenum = number.Select(n => n * 2);
-            foreach (int n in twicenum)
+            foreach (int n in wNumbers.Select(n => n * 2)) {
                 Console.WriteLine(n);
+            }
         }
     }
 }

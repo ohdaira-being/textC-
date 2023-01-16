@@ -26,31 +26,28 @@ using System.Linq;
 namespace Question3_2 {
     class Program {
         static void Main(string[] args) {
-            var name = new List<string>{
-            "Tokyo", "New Delhi", "Bangkok", "London", "Paris", "Berlin", "Canberra", "Hong Kong",
+            var wNames = new List<string>{
+                "Tokyo", "New Delhi", "Bangkok", "London", "Paris", "Berlin", "Canberra", "Hong Kong",
             };
             //1. の回答
-            var line = Console.ReadLine();
-            int index = name.FindIndex(s => s == line);
-            if (index > 0) {
-                Console.WriteLine(index);
-            } else {
-                Console.WriteLine(-1);
+            var wLine = Console.ReadLine();
+            int wIndex = wNames.FindIndex(s => s == wLine);
+            if (wIndex > 0) {
+                Console.WriteLine(wIndex);
             }
 
             //2. の回答
-            var count = name.Count(s => s.Contains('o'));
-            Console.WriteLine(count);
+            Console.WriteLine(wNames.Count(s => s.Contains('o')));
 
             //3. の回答
-            string[] containnum = name.Where(s => s.Contains('o')).ToArray();
-            foreach(var s in containnum)
+            foreach (string s in wNames.Where(s => s.Contains('o')).ToArray()) {
                 Console.WriteLine(s);
+            }
 
             //4. の回答
-            var firstBstring = name.Where(s => s.Substring(0,1) == "B").Select(s => s.Length);
-            foreach(var s in firstBstring)
+            foreach (int s in wNames.Where(s => s[0] == 'B').Select(s => s.Length)) {
                 Console.WriteLine(s);
+            }
         }
     }
 }
