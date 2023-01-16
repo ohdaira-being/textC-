@@ -6,12 +6,14 @@
 
 namespace Question2_2 {
     class Program {
-        static void Main(string[] args) {
-            for(int inch = 0;inch <= 10;inch++){
-                double meter = inch * 0.0254;
-                Console.WriteLine("{0}ft = {1:0.0000}m",inch, meter);
+        static void PrintInchToMeterList(int vStart, int vStop) {
+            for (int inch = vStart; inch <= vStop; inch++) {
+                double wMeter = inch * 0.0254;
+                Console.WriteLine($"{inch}inch = {wMeter:0.0000}m");
             }
-            Console.WriteLine("Hello World!");
+        }
+        static void Main(string[] args) {
+            PrintInchToMeterList(1, 10);
         }
     }
 }

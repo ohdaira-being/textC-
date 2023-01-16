@@ -5,18 +5,18 @@
 namespace Question2_3 {
     class Program {
         static void Main(string[] args) {
-            var sales = new SalesCounter("sales.csv");
+            var wSales = new SalesCounter("sales.csv");
 
             //店舗別集計
-            var amountPerStore = sales.GetPerStoreSales();
-            foreach (var obj in amountPerStore) {
-                Console.WriteLine("{0}{1}", obj.Key, obj.Value);
+            var wAmountPerStore = wSales.GetPerStoreSales();
+            foreach (var obj in wAmountPerStore) {
+                Console.WriteLine($"{obj.Key}{obj.Value}");
             }
 
             //商品カテゴリ別集計
-            var amountPerProductCategory = sales.GetPerProductCategorySales();
-            foreach (var obj in amountPerProductCategory) {
-                Console.WriteLine("{0}{1}", obj.Key, obj.Value);
+            var wAmountPerProductCategory = wSales.GetPerProductCategorySales();
+            foreach (var obj in wAmountPerProductCategory) {
+                Console.WriteLine($"{obj.Key}{obj.Value}");
             }
         }
     }
