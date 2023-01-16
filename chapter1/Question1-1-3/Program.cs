@@ -21,25 +21,29 @@ namespace Question1_1_3 {
     class Student : Person {
         public int Grade { get; set; }
         public int ClassNumber { get; set; }
+        public Student(string vName, DateTime vBirthday, int vGrade, int vClassNumber){ 
+            this.Name = vName;
+            this.Birthday = vBirthday;
+            this.Grade = vGrade;
+            this.ClassNumber = vClassNumber;
+        }
     }
 
     class Program {
         //2.Studentクラスのインスタンスを生成するコードを書いてください。
         //この時、全てのプロパティに値を設定してください。
         static void Main(string[] args) {
-            Student student = new Student {
-                Name = "大平",
-                Birthday = new DateTime(1900, 11, 19),
-                Grade = 100,
-                ClassNumber = 20,
-            };
+            Student student = new Student ("大平", new DateTime(1900, 11, 19),100, 20) ;
 
             //3.2で生成したインスタンスの各プロパティの値をコンソールに出力するコードを書いてください。
-            Console.WriteLine("{0}は、{1}生まれで{2}学年の{3}組です。", student.Name, student.Birthday, student.Grade, student.ClassNumber);
+            Console.WriteLine($"{student.Name}は、{student.Birthday}生まれで{student.Grade}学年の{student.ClassNumber}組です。");
 
             //4.2で生成したインスタンスをPerson型およびobject型の変数に代入できることを確認してください。
             int age = student.GetAge();
             Console.WriteLine(age);
+            //122と表示された。
+            //studentの変数がPersonで定義したメソッド内の変数に代入できることが確認できた。
+            //また、Console.WriteLineで表示されたので、object型にも代入できることが確認できた。
         }
     }
 }

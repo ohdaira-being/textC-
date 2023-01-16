@@ -36,8 +36,7 @@ namespace Question1_1_1 {
             Product dorayaki = new Product(98, "どら焼き", 210);
 
             //2.どら焼きオブジェクトの消費税額を求め、コンソールに出力するコードを書いてください。
-            int dorayakiTax = dorayaki.GetTax();
-            Console.WriteLine(dorayakiTax);
+            Console.WriteLine(dorayaki.GetTax());
 
             //3.Productクラスが属する名前空間を別の名前空間に変更し、Mainメソッドから呼び出すようにしてください。
             //ただし、MainメソッドのあるProgramクラスの名前空間はそのままとしてください。
