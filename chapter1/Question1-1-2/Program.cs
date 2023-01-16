@@ -1,28 +1,6 @@
 ﻿using System;
 
-
 namespace Question1_1_2 {
-    //MyClassとMyStruct
-    //クラス
-    class MyClass {
-        public int X { get; set; }
-        public int Y { get; set; }
-
-        public MyClass(int x, int y) {
-            this.X = x;
-            this.Y = y;
-        }
-    }
-    //構造体
-    struct MyStruct {
-        public int X { get; set; }
-        public int Y { get; set; }
-
-        public MyStruct(int x, int y) {
-            this.X = x;
-            this.Y = y;
-        }
-    }
     class Program {
         //「1.2：構造体」で定義した、MyClassとMyStructの二つを使い、以下のコードを書いてください。
 
@@ -43,7 +21,7 @@ namespace Question1_1_2 {
             //MyClass、MyStructオブジェクトの値は、自由に決めて構いません。
             MyClass wMyClass = new MyClass(2, 3);
             MyStruct wMyStruct = new MyStruct(2, 3);
-            Program.PrintObjects(wMyClass, wMyStruct);
+            PrintObjects(wMyClass, wMyStruct);
 
             //3.PrintObjectsメソッド内で、それぞれのプロパティの値を2倍に変更するコード追加してください。
             //Mainメソッドでは、PrintObjects呼び出しの後に、MyClass、MyStructオブジェクトのプロパティの値をコンソールに表示するコードを加えてください。

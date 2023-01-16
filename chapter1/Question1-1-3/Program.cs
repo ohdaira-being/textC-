@@ -1,34 +1,6 @@
 ﻿using System;
 
 namespace Question1_1_3 {
-    //「1.6:継承」で示したPersonクラス
-    public class Person {
-        public string Name { get; set; }
-        public DateTime Birthday { get; set; }
-        public int GetAge() {
-            DateTime wToday = DateTime.Today;
-            int wAge = wToday.Year - Birthday.Year;
-            if (wToday < Birthday.AddYears(wAge)) {
-                wAge--;
-            }
-            return wAge;
-        }
-    }
-
-    //1.Personクラスを継承し、Studentクラスを定義してください。
-    //Studentには、2つのプロパティ、Grade（学年）とClassNumber（組）を追加してください。
-    //2つのプロパティとも型はintとします。
-    class Student : Person {
-        public int Grade { get; set; }
-        public int ClassNumber { get; set; }
-        public Student(string vName, DateTime vBirthday, int vGrade, int vClassNumber){ 
-            this.Name = vName;
-            this.Birthday = vBirthday;
-            this.Grade = vGrade;
-            this.ClassNumber = vClassNumber;
-        }
-    }
-
     class Program {
         //2.Studentクラスのインスタンスを生成するコードを書いてください。
         //この時、全てのプロパティに値を設定してください。
@@ -39,11 +11,17 @@ namespace Question1_1_3 {
             Console.WriteLine($"{wStudent.Name}は、{wStudent.Birthday}生まれで{wStudent.Grade}学年の{wStudent.ClassNumber}組です。");
 
             //4.2で生成したインスタンスをPerson型およびobject型の変数に代入できることを確認してください。
-            int wAge = wStudent.GetAge();
-            Console.WriteLine(wAge);
-            //122と表示された。
-            //studentの変数がPersonで定義したメソッド内の変数に代入できることが確認できた。
-            //また、Console.WriteLineで表示されたので、object型にも代入できることが確認できた。
+
+            //Person型、object型、それぞれの変数を生成し、その変数に2で生成したインスタンスが代入できるかを確認する。
+            Person wPerson = new Person();//Person型の変数を生成
+            wPerson = wStudent;//Person型の変数に2で生成したインスタンスを代入
+            Console.WriteLine($"{wPerson.Name}は、{wPerson.Birthday}生まれ");
+            //正常に表示されたので、Person型の変数に代入できることが確認できた。
+            object wObject = wStudent;//object型の変数を生成し、2で生成したインスタンスを代入
+            if(wObject == wStudent){ 
+                Console.WriteLine("object型に代入出来ました");
+            }
+            //コンソールで「object型に代入出来ました」と表示されたので、object型に代入できることが確認できた。
         }
     }
 }
