@@ -21,19 +21,19 @@ namespace Question3_1 {
         static void Main(string[] args) {
             //1.の回答
             var wNumbers = new List<int> { 12, 87, 94, 14, 53, 20, 40, 35, 76, 91, 31, 17, 48 };
-            Console.WriteLine(wNumbers.Exists(n => n % 8 == 0 || n % 9 == 0));
+            Console.WriteLine(wNumbers.Exists(x => x % 8 == 0 || x % 9 == 0));
 
             //2.の回答
-            wNumbers.ForEach(s => Console.WriteLine(s / 2.0));
+            wNumbers.ForEach(x => Console.WriteLine(x / 2.0));
 
             //3. の回答
-            foreach (int s in wNumbers.Where(n => n >= 50)) {
-                Console.WriteLine(s);
+            foreach (int wNumber in wNumbers.Where(x => x >= 50)) {
+                Console.WriteLine(wNumber);
             }
 
             //4. の回答
-            foreach (int n in wNumbers.Select(n => n * 2)) {
-                Console.WriteLine(n);
+            foreach (int wNumber in wNumbers.Select(x => x * 2)) {
+                Console.WriteLine(wNumber);
             }
         }
     }

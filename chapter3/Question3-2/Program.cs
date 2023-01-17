@@ -31,22 +31,24 @@ namespace Question3_2 {
             };
             //1. の回答
             var wLine = Console.ReadLine();
-            int wIndex = wNames.FindIndex(s => s == wLine);
+            int wIndex = wNames.FindIndex(x => x == wLine);
             if (wIndex > 0) {
+                Console.WriteLine(wIndex + 1);
+            } else {
                 Console.WriteLine(wIndex);
             }
 
             //2. の回答
-            Console.WriteLine(wNames.Count(s => s.Contains('o')));
+            Console.WriteLine(wNames.Count(x => x.Contains('o')));
 
             //3. の回答
-            foreach (string s in wNames.Where(s => s.Contains('o')).ToArray()) {
-                Console.WriteLine(s);
+            foreach (string wName in wNames.Where(x => x.Contains('o')).ToArray()) {
+                Console.WriteLine(wName);
             }
 
             //4. の回答
-            foreach (int s in wNames.Where(s => s[0] == 'B').Select(s => s.Length)) {
-                Console.WriteLine(s);
+            foreach (int wName in wNames.Where(x => x[0] == 'B').Select(x => x.Length)) {
+                Console.WriteLine(wName);
             }
         }
     }
