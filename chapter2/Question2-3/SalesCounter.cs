@@ -8,12 +8,19 @@ namespace Question2_3 {
     class SalesCounter {
         private IEnumerable<Sale> F_sales;
 
-        //コンストラクタ
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="vFilePath"></param>
         public SalesCounter(string vFilePath) {
             F_sales = ReadSales(vFilePath);
         }
 
-        //売上データを読み込み、Saleオブジェクトのリストを返す
+        /// <summary>
+        /// 売上データを読み込み、Saleオブジェクトのリストを返す
+        /// </summary>
+        /// <param name="vFilePath"></param>
+        /// <returns>wSales</returns>
         private static IEnumerable<Sale> ReadSales(string vFilePath) {
             var wSales = new List<Sale>();
             var wLines = File.ReadAllLines(vFilePath);
@@ -29,7 +36,10 @@ namespace Question2_3 {
             return wSales;
         }
 
-        //店舗別売上を求める
+        /// <summary>
+        /// 店舗別売上を求める
+        /// </summary>
+        /// <returns>wDict</returns>
         public IDictionary<string, int> GetPerStoreSales() {
             var wDict = new Dictionary<string, int>();
             foreach (var sale in F_sales) {
@@ -41,7 +51,10 @@ namespace Question2_3 {
             return wDict;
         }
 
-        //商品カテゴリ別の売上を求める
+        /// <summary>
+        /// 商品カテゴリ別の売上を求める
+        /// </summary>
+        /// <returns>wDict</returns>
         public IDictionary<string, int> GetPerProductCategorySales() {
             var wDict = new Dictionary<string, int>();
             foreach (var sale in F_sales) {

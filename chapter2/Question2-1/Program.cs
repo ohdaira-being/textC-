@@ -18,13 +18,13 @@ namespace Question2_1 {
     class Program {
         static void Main(string[] args) {
             var wSongs = new Song[]{
-                new Song("1つ目", "アーティスト1", 120),
-                new Song("2つ目", "アーティスト2", 180),
-                new Song("3つ目", "アーティスト3", 240),
+                new Song("タイトル１", "アーティスト1",32),
+                new Song("タイトル２", "アーティスト2", 457),
+                new Song("タイトル３", "アーティスト3", 22),
             };
 
-            foreach (var s in wSongs) {
-                Console.WriteLine(s);
+            foreach (var wSong in wSongs) {
+                Console.WriteLine($"タイトル名：{wSong.Title}、アーティスト名：{wSong.ArtistName}、長さ：{wSong.Length}");
             }
         }
     }
