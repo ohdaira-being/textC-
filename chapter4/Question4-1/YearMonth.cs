@@ -36,6 +36,10 @@
         }
 
         //3. の回答
+        /// <summary>
+        /// 1ヶ月後のYearMonthを求める
+        /// </summary>
+        /// <returns>YearMonth型の1ヶ月後の年月</returns>
         public YearMonth AddOneMonth() {
             if (Month == 12) {
                 Month = 1;
