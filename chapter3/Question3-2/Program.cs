@@ -30,9 +30,8 @@ namespace Question3_2 {
                 "Tokyo", "New Delhi", "Bangkok", "London", "Paris", "Berlin", "Canberra", "Hong Kong",
             };
             //1. の回答
-            var wLine = Console.ReadLine();
-            int wIndex = wNames.FindIndex(x => x == wLine);
-            if (wIndex > 0) {
+            int wIndex = wNames.FindIndex(x => x == Console.ReadLine());
+            if (wIndex >= 0) {
                 Console.WriteLine(wIndex + 1);
             } else {
                 Console.WriteLine(wIndex);
