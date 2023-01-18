@@ -6,6 +6,11 @@
 
 namespace Question2_2 {
     class Program {
+        /// <summary>
+        /// インチをメートルに変換し、コンソールに出力するメソッド
+        /// </summary>
+        /// <param name="vStart">開始値</param>
+        /// <param name="vStop">終了値</param>
         static void PrintInchToMeterList(int vStart, int vStop) {
             for (int inch = vStart; inch <= vStop; inch++) {
                 double wMeter = inch * 0.0254;

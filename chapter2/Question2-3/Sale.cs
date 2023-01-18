@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Question2_3 {
+﻿namespace Question2_3 {
     class Sale {
         /// <summary>
         /// 販売した店舗名

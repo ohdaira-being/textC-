@@ -4,14 +4,16 @@ using System.Text;
 using System.IO;
 
 namespace Question2_3 {
-    //売上集計クラス
+    /// <summary>
+    /// 売上集計クラス
+    /// </summary>
     class SalesCounter {
         private IEnumerable<Sale> F_sales;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="vFilePath"></param>
+        /// <param name="vFilePath">読み込むファイルのパス</param>
         public SalesCounter(string vFilePath) {
             F_sales = ReadSales(vFilePath);
         }

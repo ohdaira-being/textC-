@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Question2_1 {
+    /// <summary>
+    /// 曲クラス
+    /// </summary>
     public class Song {
         /// <summary>
         /// 曲のタイトル
@@ -20,9 +21,9 @@ namespace Question2_1 {
         /// <summary>
         /// 曲のコンストラクタ
         /// </summary>
-        /// <param name="vTitle"></param>
-        /// <param name="vArtistName"></param>
-        /// <param name="vLength"></param>
+        /// <param name="vTitle">曲のタイトル</param>
+        /// <param name="vArtistName">曲のアーティスト名</param>
+        /// <param name="vLength">曲の長さ</param>
         public Song(string vTitle, string vArtistName, int vLength) {
             this.Title = vTitle;
             this.ArtistName = vArtistName;

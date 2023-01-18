@@ -8,15 +8,15 @@ namespace Question2_3 {
             var wSales = new SalesCounter("sales.csv");
 
             //店舗別集計
-            var wAmountPerStore = wSales.GetPerStoreSales();
-            foreach (var obj in wAmountPerStore) {
-                Console.WriteLine($"{obj.Key}{obj.Value}");
+            var wAmountPerStores = wSales.GetPerStoreSales();
+            foreach (var wAmountPerStore in wAmountPerStores) {
+                Console.WriteLine($"{wAmountPerStore.Key}{wAmountPerStore.Value}");
             }
 
             //商品カテゴリ別集計
-            var wAmountPerProductCategory = wSales.GetPerProductCategorySales();
-            foreach (var obj in wAmountPerProductCategory) {
-                Console.WriteLine($"{obj.Key}{obj.Value}");
+            var wAmountPerProductCategories = wSales.GetPerProductCategorySales();
+            foreach (var wAmountPerProductCategory in wAmountPerProductCategories) {
+                Console.WriteLine($"{wAmountPerProductCategory.Key}{wAmountPerProductCategory.Value}");
             }
         }
     }
