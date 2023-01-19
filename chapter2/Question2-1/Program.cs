@@ -24,7 +24,9 @@ namespace Question2_1 {
             };
 
             foreach (var wSong in wSongs) {
-                Console.WriteLine($"タイトル名：{wSong.Title}、アーティスト名：{wSong.ArtistName}、長さ：{wSong.Length}");
+                Console.WriteLine(
+                    $"タイトル名：{wSong.Title}、アーティスト名：{wSong.ArtistName}、長さ：{new TimeSpan(0, 0, wSong.Length):mm\\:ss}"
+                    );
             }
         }
     }

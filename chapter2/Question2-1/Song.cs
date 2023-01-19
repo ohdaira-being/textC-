@@ -16,7 +16,7 @@ namespace Question2_1 {
         /// <summary>
         /// 曲の長さ（最長60分として、秒数で取得）
         /// </summary>
-        public string Length { get; set; }
+        public int Length { get; set; }
 
         /// <summary>
         /// 曲のコンストラクタ
@@ -27,7 +27,7 @@ namespace Question2_1 {
         public Song(string vTitle, string vArtistName, int vLength) {
             this.Title = vTitle;
             this.ArtistName = vArtistName;
-            this.Length = new TimeSpan(0,0,vLength).ToString(@"mm\:ss");
+            this.Length = vLength;
         }
     }
 }
