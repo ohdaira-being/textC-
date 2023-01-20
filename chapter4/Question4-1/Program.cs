@@ -28,9 +28,9 @@ namespace Question4_1 {
         static void Main(string[] args) {
             //各問題は、YearMonthクラスで実装しました。
             //以下、確認用
-            YearMonth wYearMonth = new YearMonth(2000, 4);
-            Console.WriteLine(wYearMonth);//2000年4月と出力
-            Console.WriteLine(wYearMonth.AddOneMonth());//2000年5月と出力
+            YearMonth wCheckYearMonth = new YearMonth(2000, 12);
+            Console.WriteLine(wCheckYearMonth);//2000年12月と出力
+            Console.WriteLine(wCheckYearMonth.AddOneMonth());//2001年1月と出力
         }
     }
 }

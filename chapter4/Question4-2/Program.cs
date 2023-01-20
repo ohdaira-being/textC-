@@ -24,50 +24,46 @@ using System.Linq;
 namespace Question4_2 {
     class Program {
         //3. の回答
-        static YearMonth ChooseFirstYearMonth(YearMonth[] vYMArrays) {
-            YearMonth FirstYearMonth = null;
-            foreach (YearMonth YMArray in vYMArrays) {
-                if (YMArray.Is21Century == 21) {
-                    FirstYearMonth = YMArray;
-                    break;
+        static YearMonth ChooseFirstYearMonth(YearMonth[] vYearMonths) {
+            foreach (YearMonth wYearMonth in vYearMonths) {
+                if (wYearMonth.Is21Century) {
+                    return wYearMonth;
                 }
             }
-            return FirstYearMonth;
+            return null;
         }
 
         static void Main(string[] args) {
             //1. の回答
-            var ArrayYearMonths = new YearMonth[] {
-                new YearMonth(200, 2),
-                new YearMonth(2010, 3),
-                new YearMonth(2020, 4),
-                new YearMonth(260, 6),
-                new YearMonth(2090, 12),
+            var wYearMonths = new YearMonth[] {
+                new YearMonth(1000, 12),
+                new YearMonth(2100, 12),
+                new YearMonth(2001, 1),
+                new YearMonth(2000, 12),
+                new YearMonth(2101, 12),
             };
 
             //2. の回答
-            foreach (YearMonth ArrayYearMonth in ArrayYearMonths) {
-                Console.WriteLine(ArrayYearMonth);
+            foreach (YearMonth wYearMonth in wYearMonths) {
+                Console.WriteLine(wYearMonth);
             }
 
             //4. の回答
             Console.WriteLine("ここから4の回答");
-            YearMonth wChooseYearMonth = ChooseFirstYearMonth(ArrayYearMonths);
-            if (wChooseYearMonth == null) {
-                Console.WriteLine("21世紀のデータはありません");
-            } else {
-                Console.WriteLine(wChooseYearMonth);
-            }
+            Console.WriteLine(ChooseFirstYearMonth(wYearMonths)?.ToString() ?? "21世紀のデータはありません");
+
+            //追加要望
+            Console.WriteLine("追加要望の回答");
+            Console.WriteLine(wYearMonths.FirstOrDefault(x => x.Is21Century == true)?.ToString()?? "21世紀のデータはありません");
 
             //5. の回答
             Console.WriteLine("ここから5の1つ目の回答");
-            foreach (YearMonth wArrayYearAddMonth in ArrayYearMonths.Select(x => x.AddOneMonth())) {
-                Console.WriteLine(wArrayYearAddMonth);
+            foreach (YearMonth wYearAddMonth in wYearMonths.Select(x => x.AddOneMonth())) {
+                Console.WriteLine(wYearAddMonth.ToString());
             }
             Console.WriteLine("ここから5の2つ目の回答");
-            var wArrayYearAddMonths_Lists = ArrayYearMonths.OrderBy(x => x.Year).ThenBy(x => x.Month);
-            foreach (YearMonth wArrayYearAddMonths_List in wArrayYearAddMonths_Lists) {
-                Console.WriteLine(wArrayYearAddMonths_List);
+            foreach (YearMonth wYearAddMonth in wYearMonths.Select(x => x.AddOneMonth()).OrderBy(x => x.Year).ThenBy(x => x.Month)) {
+                Console.WriteLine(wYearAddMonth);
             }
         }
     }

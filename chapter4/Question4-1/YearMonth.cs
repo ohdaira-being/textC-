@@ -1,38 +1,43 @@
 ﻿namespace Question4_1 {
+    /// <summary>
+    /// YearMonthクラス
+    /// </summary>
     public class YearMonth {
-        private int FCentury = 21;
+        private bool FCentury = true;
         //1. の回答
         /// <summary>
         /// 年を表すプロパティ
         /// </summary>
-        public int Year { get; private set; }
+        public int Year { get; }
         /// <summary>
         /// 月を表すプロパティ
         /// </summary>
-        public int Month { get; private set; }
+        public int Month { get; }
 
         //2. の回答
         /// <summary>
         /// 21世紀を表すプロパティ
         /// </summary>
-        public int Is21Century {
+        public bool Is21Century {
             get {
                 return FCentury;
             }
             set {
-                if (value < 2001 || value > 2100) FCentury = 0;
+                FCentury = value;
             }
         }
 
         /// <summary>
         /// YearMonthのコンストラクタ
         /// </summary>
-        /// <param name="vYear"></param>
-        /// <param name="vMonth"></param>
+        /// <param name="vYear">Year</param>
+        /// <param name="vMonth">Month</param>
         public YearMonth(int vYear, int vMonth) {
             this.Year = vYear;
             this.Month = vMonth;
-            this.Is21Century = vYear;
+            if (vYear < 2001 || 2100 < vYear) {
+                this.FCentury = false;
+            }
         }
 
         //3. の回答
@@ -41,20 +46,21 @@
         /// </summary>
         /// <returns>YearMonth型の1ヶ月後の年月</returns>
         public YearMonth AddOneMonth() {
-            if (Month == 12) {
-                Month = 1;
+            int wNextMonth = this.Month;
+            int wNextYear = this.Year;
+            if (wNextMonth == 12) {
+                wNextMonth = 1;
+                wNextYear++;
             } else {
-                Month++;
+                wNextMonth++;
             }
-            YearMonth YearAddOneMonth = new YearMonth(Year, Month);
-            return YearAddOneMonth;
+            YearMonth wYearAddOneMonth = new YearMonth(wNextYear, wNextMonth);
+            return wYearAddOneMonth;
         }
 
         //4. の回答
         public override string ToString() {
-            //ここを実装する
-            string StringDay = Year.ToString() + "年" + Month.ToString() + "月";
-            return StringDay;
+            return this.Year + "年" + this.Month + "月";
         }
     }
 }
