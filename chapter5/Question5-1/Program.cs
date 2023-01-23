@@ -9,7 +9,8 @@ namespace Question5_1 {
         static void Main(string[] args) {
             var wCultureInfo = new CultureInfo("ja-JP");
 
-            if (String.Compare(Console.ReadLine(), Console.ReadLine(), wCultureInfo, CompareOptions.IgnoreCase) == 0) {
+            if (String.Compare(Console.ReadLine(), Console.ReadLine(), wCultureInfo,
+                CompareOptions.IgnoreCase | CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth) == 0) {
                 Console.WriteLine("一致しています。");
             } else {
                 Console.WriteLine("一致していません。");

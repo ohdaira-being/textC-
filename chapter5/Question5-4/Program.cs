@@ -20,6 +20,10 @@ namespace Question5_4 {
                 .ToString()
                 );
 
+            //StringBuilderを使わない方法
+            string wText = "Novelist=谷崎潤一郎;BestWork=春琴抄;Born=1886";
+            string[] wWords = wText.Split(new[] { ";", "=" }, StringSplitOptions.RemoveEmptyEntries);
+            Console.WriteLine($"作家　：{wWords[1]}\n代表作：{wWords[3]}\n誕生年：{wWords[5]}");
         }
     }
 }

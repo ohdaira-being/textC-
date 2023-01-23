@@ -17,7 +17,7 @@ namespace Question5_3 {
             string wInitialText = "Jackdaws love my big sphix of quartz";
 
             //1.　の回答
-            Console.WriteLine(wInitialText.Count(x => x == (' ')));
+            Console.WriteLine(wInitialText.Count(x => x == ' '));
 
             //2. の回答
             Console.WriteLine(wInitialText.Replace("big", "small"));
@@ -32,7 +32,7 @@ namespace Question5_3 {
             }
 
             //5.　の回答
-            var wStringBuilder = new StringBuilder(200);
+            var wStringBuilder = new StringBuilder(50);
             foreach (string wText in wInitialTextArray) {
                 wStringBuilder.Append(wText+" ");
             }
