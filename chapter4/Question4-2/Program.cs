@@ -54,7 +54,7 @@ namespace Question4_2 {
 
             //追加要望
             Console.WriteLine("追加要望の回答");
-            Console.WriteLine(wYearMonths.FirstOrDefault(x => x.Is21Century == true)?.ToString()?? "21世紀のデータはありません");
+            Console.WriteLine(wYearMonths.FirstOrDefault(x => x.Is21Century)?.ToString() ?? "21世紀のデータはありません");
 
             //5. の回答
             Console.WriteLine("ここから5の1つ目の回答");

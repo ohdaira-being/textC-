@@ -3,7 +3,6 @@
     /// YearMonthクラス
     /// </summary>
     public class YearMonth {
-        private bool FCentury = true;
         //1. の回答
         /// <summary>
         /// 年を表すプロパティ
@@ -20,24 +19,22 @@
         /// </summary>
         public bool Is21Century {
             get {
-                return FCentury;
-            }
-            set {
-                FCentury = value;
+                if (2001 <= Year && Year <= 2100) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
 
         /// <summary>
         /// YearMonthのコンストラクタ
         /// </summary>
-        /// <param name="vYear">Year</param>
-        /// <param name="vMonth">Month</param>
+        /// <param name="vYear">vYear</param>
+        /// <param name="vMonth">vMonth</param>
         public YearMonth(int vYear, int vMonth) {
             this.Year = vYear;
             this.Month = vMonth;
-            if (vYear < 2001 || 2100 < vYear) {
-                this.FCentury = false;
-            }
         }
 
         //3. の回答
