@@ -19,11 +19,7 @@
         /// </summary>
         public bool Is21Century {
             get {
-                if (2001 <= Year && Year <= 2100) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return 2001 <= Year && Year <= 2100;
             }
         }
 
