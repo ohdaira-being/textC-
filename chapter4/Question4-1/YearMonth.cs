@@ -17,11 +17,7 @@
         /// <summary>
         /// 21世紀を表すプロパティ
         /// </summary>
-        public bool Is21Century {
-            get {
-                return 2001 <= Year && Year <= 2100;
-            }
-        }
+        public bool Is21Century => 2001 <= this.Year && this.Year <= 2100;
 
         /// <summary>
         /// YearMonthのコンストラクタ
