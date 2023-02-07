@@ -23,19 +23,26 @@ namespace Question7_1 {
         static void Main(string[] args) {
             //1.の回答
             Console.WriteLine("～1問目の回答～");
-            string wText = "Cozy lummox gives smart squid who asks for job pen".Replace(" ", "").ToUpper();
+            string wText = "Cozy lummox gives smart squid who asks for job pen";
             var wTextDict = new Dictionary<char, int>();
-            foreach (char wWord in wText.Distinct()) {
-                wTextDict[wWord] = wText.Count(x => x == wWord);
+            foreach (char wWord in wText.ToUpper().Replace(" ", "").Distinct()) {
+                wTextDict[wWord] = wText.ToUpper().Count(x => x == wWord);
             }
             foreach (KeyValuePair<char, int> wDict in wTextDict.OrderBy(x => x.Key)) {
                 Console.WriteLine($"'{wDict.Key}'：{wDict.Value}");
             }
 
+            //追加
+            Console.WriteLine("～追加の回答～");
+            var yyy = wText.Replace(" ","").ToUpper().GroupBy(x=>x);
+            foreach(var ww in yyy){
+                Console.WriteLine($"{ww.Key}：{ww.Count()}");
+            }
+
             //2.の回答
             Console.WriteLine("～2問目の回答～");
             var wRewriteTextDict = new SortedDictionary<char, int>();
-            foreach (char wWord in wText.Distinct()) {
+            foreach (char wWord in wText.Replace(" ", "").Distinct()) {
                 wRewriteTextDict[wWord] = wText.Count(x => x == wWord);
             }
             foreach (KeyValuePair<char, int> wDict in wRewriteTextDict) {

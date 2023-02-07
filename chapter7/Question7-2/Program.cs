@@ -26,21 +26,21 @@ namespace Question7_2 {
 
             //3.の回答
             Console.WriteLine("～３の回答～");
-            Abbreviations wSampleDict = new Abbreviations();
-            Console.WriteLine($"ディクショナリに追加前の用語数は、{wSampleDict.Count}語");
-            wSampleDict.Add("本シス", "本社システム課");
-            Console.WriteLine($"ディクショナリに追加後の用語数は、{wSampleDict.Count}語");
-            if (wSampleDict.Remove("本シス")) {
+            Abbreviations wAbbreviationsDict = new Abbreviations();
+            Console.WriteLine($"ディクショナリに追加前の用語数は、{wAbbreviationsDict.Count}語");
+            wAbbreviationsDict.Add("本シス", "本社システム課");
+            Console.WriteLine($"ディクショナリに追加後の用語数は、{wAbbreviationsDict.Count}語");
+            if (wAbbreviationsDict.Remove("本シス")) {
                 Console.WriteLine("削除されました。");
             } else {
                 Console.WriteLine("削除できませんでした。");
             }
-            Console.WriteLine($"ディクショナリから削除語の用語数は、{wSampleDict.Count}語");
+            Console.WriteLine($"ディクショナリから削除語の用語数は、{wAbbreviationsDict.Count}語");
 
             //4.の回答
             //Abbreviationsクラスの一番下にFindKeyAllAtNumメソッドを定義しました。
             Console.WriteLine("～４の回答～");
-            foreach (KeyValuePair<string, string> wItemAtNum in wSampleDict.FindKeyAllAtNum(3)) {
+            foreach (KeyValuePair<string, string> wItemAtNum in wAbbreviationsDict.FindDictAtCharNums(3)) {
                 Console.WriteLine($"{wItemAtNum.Key}={wItemAtNum.Value}");
             }
         }
