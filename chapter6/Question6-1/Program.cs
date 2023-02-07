@@ -13,22 +13,29 @@ namespace Question6_1 {
 
     class Program {
         static void Main(string[] args) {
-            var numbers = new int[] { 5, 10, 17, 9, 3, 21, 10, 40, 21, 3, 35 };
+            var wNumbers = new int[] { 5, 10, 17, 9, 3, 21, 10, 40, 21, 3, 35 };
 
             //1.　の回答
-            Console.WriteLine(numbers.Max());
+            Console.WriteLine(wNumbers.Max());
 
             //2. の回答
-            Console.WriteLine(numbers.Take(numbers.Length - 1).LastOrDefault());
+            foreach (int wNumber in wNumbers.Reverse().Take(2).ToArray()) {
+                Console.WriteLine(wNumber);
+            }
 
             //3. の回答
-            Console.WriteLine(String.Join(" ", numbers.Select(x => x.ToString())));
+            Console.WriteLine(String.Join(" ", wNumbers.Select(x => x.ToString())));
+
+            //追加
+            foreach (var wStrNum in wNumbers.Select(x => x.ToString())) {
+                Console.WriteLine($"{wStrNum.PadLeft(4, '0')}");
+            }
 
             //4. の回答
-            Console.WriteLine(String.Join(" ", numbers.OrderBy(x => x).Take(3)));
+            Console.WriteLine(String.Join(" ", wNumbers.OrderBy(x => x).Take(3)));
 
             //5. の回答
-            Console.WriteLine(numbers.Distinct().Count(x => x > 10));
+            Console.WriteLine(wNumbers.Distinct().Count(x => x > 10));
         }
     }
 }
