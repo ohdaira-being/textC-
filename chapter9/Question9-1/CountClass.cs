@@ -4,6 +4,8 @@ using System.IO;
 using System.Text;
 
 namespace Question9_1 {
+
+
     //1.指定したC#のソースファイルを読み込み、キーワード"class"が含まれている行数を
     //カウントするコンソールアプリケーションCountClassを作成してください。
     //このとき、StreamReaderクラスを使い、1行ずつ読み込む処理にしてください。
@@ -14,18 +16,19 @@ namespace Question9_1 {
     //2.このプログラムをFile.ReadAllLinesメソッドを利用して書き換えてください。
 
     //3.このプログラムをFile.ReadLineメソッドを利用して書き換えてください。
+
+
     class CountClass {
         static void Main(string[] args) {
+            string wFilePath = @"../../../../CountClass.txt";
 
-            var wFilePath = @"C:\Users\ohdaira\Desktop\C#成果物\idiom\chapter9\CountClass.txt";
-            int wCount = 0;
             if (File.Exists(wFilePath)) {
+
                 //1.の回答
                 using (var wReader = new StreamReader(wFilePath, Encoding.UTF8)) {
+                    int wCount = 0;
                     while (!wReader.EndOfStream) {
-                        if (wReader.ReadLine().Contains("class")) {
-                            wCount++;
-                        }
+                        if (wReader.ReadLine().Contains("class")) wCount++;
                     }
                     Console.WriteLine(wCount);
                 }
