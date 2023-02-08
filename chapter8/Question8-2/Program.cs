@@ -9,16 +9,15 @@ namespace Question8_2 {
         /// </summary>
         /// <param name="vDate">今日の日付</param>
         /// <param name="vDayOfWeek">指定曜日</param>
-        /// <returns>次の週の指定曜日の日にち</returns>
-        public static DateTime NextWeekDay(DateTime vDate, DayOfWeek vDayOfWeek) {
-            //今週末の土曜日を起点考える
-            int wDays = ((int)DayOfWeek.Saturday - (int)vDate.DayOfWeek) + (int)vDayOfWeek + 1;
-            return vDate.AddDays(wDays);
+        /// <returns>次週の指定曜日の日にち</returns>
+        public static DateTime NextDayOfWeek(DateTime vDate, DayOfWeek vDayOfWeek) {
+            int wElapsedDays = (7 - (int)vDate.DayOfWeek) + (int)vDayOfWeek;
+            return vDate.AddDays(wElapsedDays);
         }
 
         static void Main(string[] args) {
             //NextWeekDayメソッドの利用
-            Console.WriteLine($"来週の金曜日は、{NextWeekDay(DateTime.Today, DayOfWeek.Friday).ToString("D")}");
+            Console.WriteLine($"来週の金曜日は、{NextDayOfWeek(DateTime.Today, DayOfWeek.Friday).ToString("D")}");
         }
     }
 }

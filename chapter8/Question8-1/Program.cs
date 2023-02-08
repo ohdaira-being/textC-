@@ -16,8 +16,7 @@ namespace Question8_1 {
 
             var wCulture = new CultureInfo("ja-JP");
             wCulture.DateTimeFormat.Calendar = new JapaneseCalendar();
-            var wDayOfWeek = wCulture.DateTimeFormat.GetDayName(wNow.DayOfWeek);
-            Console.WriteLine(wNow.ToString($"ggyy年{wNow.Month,2}月{wNow.Day,2}日（{wDayOfWeek}）", wCulture));
+            Console.WriteLine(wNow.ToString($"ggyy年{wNow.Month,2}月{wNow.Day,2}日（dddd）", wCulture));
         }
     }
 }

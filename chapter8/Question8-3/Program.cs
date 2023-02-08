@@ -2,7 +2,7 @@
 using System.Globalization;
 
 namespace Question8_3 {
-    class Program : TimeWatch {
+    class Program {
         //ある処理時間を計測するTimeWatchクラスを定義してください。
 
         static void Main(string[] args) {
@@ -15,10 +15,9 @@ namespace Question8_3 {
             Console.WriteLine(DateTime.Now.ToString("yyyy年MM月dd日 HH時mm分ss秒fffミリ秒"));
             var wCulture = new CultureInfo("ja-JP");
             wCulture.DateTimeFormat.Calendar = new JapaneseCalendar();
-            var wDayOfWeek = wCulture.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek);
             Console.WriteLine(
                 DateTime.Now.ToString
-                ($"ggyy年{DateTime.Now.Month,2}月{DateTime.Now.Day,2}日（{wDayOfWeek}）（{DateTime.Now.Millisecond}）", wCulture)
+                ($"ggyy年{DateTime.Now.Month,2}月{DateTime.Now.Day,2}日（dddd）（{DateTime.Now.Millisecond}）", wCulture)
                 );
 
             //計測終了

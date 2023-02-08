@@ -6,20 +6,16 @@ namespace Question8_3 {
     /// TimeWatchクラス
     /// </summary>
     class TimeWatch {
-        private DateTime wStart;
+        private DateTime FStartedTime;
         /// <summary>
         /// 計測開始するメソッド
         /// </summary>
-        public void Start() {
-            wStart = DateTime.Now;//現在時刻を開始時刻として記録
-        }
+        public void Start() => this.FStartedTime = DateTime.Now;//現在時刻を開始時刻として記録
 
         /// <summary>
         /// 計測停止するメソッド
         /// </summary>
-        public TimeSpan Stop() {
-            return (DateTime.Now - wStart);//開始時刻と現在時刻の時間差を記録
-        }
+        public TimeSpan Stop() => DateTime.Now - this.FStartedTime;//開始時刻と現在時刻の時間差を記録
     }
 }
 
