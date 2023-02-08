@@ -27,8 +27,8 @@ namespace Question6_1 {
             Console.WriteLine(String.Join(" ", wNumbers.Select(x => x.ToString())));
 
             //追加
-            foreach (var wStrNum in wNumbers.Select(x => x.ToString())) {
-                Console.WriteLine($"{wStrNum.PadLeft(4, '0')}");
+            foreach (var wStrNum in wNumbers.Select(x => x.ToString("0000"))) {
+                Console.WriteLine(wStrNum);
             }
 
             //4. の回答

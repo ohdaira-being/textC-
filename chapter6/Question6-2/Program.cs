@@ -25,15 +25,6 @@ namespace Question6_2 {
 
     class Program {
         static void Main(string[] args) {
-            //var wBooks = new List<Book>{
-            //    new Book{ Title = "C#プログラミングの新常識", Price = 3800, Pages = 378},
-            //    new Book{ Title = "ラムダ式とLINQの極意", Price = 2500, Pages = 312},
-            //    new Book{ Title = "ワンダフル・C#ライフ", Price = 2900, Pages = 385},
-            //    new Book{ Title = "1人で学ぶ並列処理プログラミング", Price = 4800, Pages = 464},
-            //    new Book{ Title = "フレーズで覚えるC#入門", Price = 5300, Pages = 604},
-            //    new Book{ Title = "私でも分かったASP.NET MVC", Price = 3200, Pages = 453},
-            //    new Book{ Title = "楽しいC#プログラミング教室", Price = 2540, Pages = 348},
-            //};
 
             //追加
             var wBooks = new List<Book>{
@@ -45,9 +36,6 @@ namespace Question6_2 {
                 new Book( "私でも分かったASP.NET MVC"      , 3200 , 453 ),
                 new Book( "楽しいC#プログラミング教室"     , 2540 , 348 ),
             };
-
-            //C#が含まれている書斎
-            var wContainBooks = wBooks.Where(x => x.Title.Contains("C#"));
 
             //1.　の回答
             //追加も一緒に書いています。
@@ -62,6 +50,8 @@ namespace Question6_2 {
             };
 
             //2.　の回答
+            //C#が含まれている書斎
+            var wContainBooks = wBooks.Where(x => x.Title.Contains("C#"));
             Console.WriteLine(
                 $"タイトルに「C#」が含まれている書籍は、" +
                 $"{wContainBooks.Count()}冊あります。"
@@ -80,13 +70,8 @@ namespace Question6_2 {
                 );
 
             //要望
-            if (wBooks.Any(x => x.Price >= 6000)) {
-                foreach (var wBooOver6000 in wBooks.Where(x => x.Price > 6000)) {
-                    Console.WriteLine($"{wBooOver6000.Title}：{wBooOver6000.Price}");
-                }
-            } else {
-                Console.WriteLine("6,000円以上の本は、ありませんでした。");
-            };
+
+            Console.WriteLine(wBooks.FirstOrDefault(x => x.Price >= 6000)?.Title ?? "6,000円以上の本は、ありませんでした。");
 
             //5.　の回答
             Console.WriteLine(
