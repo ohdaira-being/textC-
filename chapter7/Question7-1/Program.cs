@@ -34,9 +34,9 @@ namespace Question7_1 {
 
             //追加
             Console.WriteLine("～追加の回答～");
-            var yyy = wText.Replace(" ","").ToUpper().GroupBy(x=>x);
-            foreach(var ww in yyy){
-                Console.WriteLine($"{ww.Key}：{ww.Count()}");
+            IEnumerable<IGrouping<char, char>> wGroupingTexts = wText.Replace(" ", "").ToUpper().GroupBy(x => x);
+            foreach (IGrouping<char, char> wGroupingText in wGroupingTexts) {
+                Console.WriteLine($"{wGroupingText.Key}：{wGroupingText.Count()}");
             }
 
             //2.の回答

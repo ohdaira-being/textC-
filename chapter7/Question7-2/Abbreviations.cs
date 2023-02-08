@@ -8,22 +8,22 @@ namespace Question7_2 {
     /// </summary>
     class Abbreviations {
         /// <summary>
-        /// 読み込んだファイルからキーと値を取得するディクショナリプロパティ
+        /// 読み込んだファイルからキーと値を取得するディクショナリ
         /// </summary>
-        private Dictionary<string, string> Dict = new Dictionary<string, string>();
+        private Dictionary<string, string> FDict = new Dictionary<string, string>();
 
         //1.の回答
         /// <summary>
         /// カウントプロパティ
         /// </summary>
-        public int Count => Dict.Count();
+        public int Count => FDict.Count();
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public Abbreviations() {
-            var wLines = File.ReadAllLines("Abbreviations.txt");
-            Dict = wLines.Select(line => line.Split('=')).ToDictionary(x => x[0], x => x[1]);
+            string[] wLines = File.ReadAllLines("Abbreviations.txt");
+            this.FDict = wLines.Select(line => line.Split('=')).ToDictionary(x => x[0], x => x[1]);
         }
 
         //2.の回答
@@ -33,7 +33,7 @@ namespace Question7_2 {
         /// <param name="vRemoveText">省略語</param>
         /// <returns>削除後のディクショナリDict</returns>
         public bool Remove(string vRemoveText) {
-            return Dict.Remove(vRemoveText);
+            return this.FDict.Remove(vRemoveText);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Question7_2 {
         /// <param name="vAbbr">ディクショナリDictに追加するキー</param>
         /// <param name="vJapanese">ディクショナリDictに追加する値</param>
         public void Add(string vAbbr, string vJapanese) {
-            Dict[vAbbr] = vJapanese;
+            this.FDict[vAbbr] = vJapanese;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Question7_2 {
         /// </summary>
         /// <param name="vAbbr">検索するキー</param>
         /// <returns>ディクショナリwDictのキー[vAbbr]に対応する値。なければ、nullを返す。</returns>
-        public string this[string vAbbr] => Dict.ContainsKey(vAbbr) ? Dict[vAbbr] : null;
+        public string this[string vAbbr] => this.FDict.ContainsKey(vAbbr) ? this.FDict[vAbbr] : null;
 
         /// <summary>
         /// 日本語から対応する省略語を取り出す
@@ -58,7 +58,7 @@ namespace Question7_2 {
         /// <param name="vJapanese">検索する値</param>
         /// <returns>ディクショナリDictの値[vJapanese]に対応する値。なければ、nullを返す。</returns>
         public string ToAddreviations(string vJapanese) {
-            return Dict.FirstOrDefault(x => x.Value == vJapanese).Key;
+            return this.FDict.FirstOrDefault(x => x.Value == vJapanese).Key;
         }
 
         /// <summary>
@@ -67,9 +67,10 @@ namespace Question7_2 {
         /// <param name="vSubstring">検索するワード</param>
         /// <returns>値に検索ワードを含む全てのディクショナリの要素を返す。</returns>
         public IEnumerable<KeyValuePair<string, string>> FindAll(string vSubstring) {
-            foreach (KeyValuePair<string, string> wItem in Dict) {
-                if (wItem.Value.Contains(vSubstring))
+            foreach (KeyValuePair<string, string> wItem in this.FDict) {
+                if (wItem.Value.Contains(vSubstring)) {
                     yield return wItem;
+                }
             }
         }
 
@@ -79,7 +80,7 @@ namespace Question7_2 {
         /// <param name="vCharNums">文字数int</param>
         /// <returns>指定された文字数のKeyを持ったディクショナリの要素を全て返す。</returns>
         public IEnumerable<KeyValuePair<string, string>> FindDictAtCharNums(int vCharNums) {
-            foreach (KeyValuePair<string, string> wDict in Dict.Where(x => x.Key.Length == vCharNums)) {
+            foreach (KeyValuePair<string, string> wDict in this.FDict.Where(x => x.Key.Length == vCharNums)) {
                 yield return wDict;
             }
         }
