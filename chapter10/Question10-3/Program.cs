@@ -11,14 +11,14 @@ namespace Question10_3 {
                 "Time is money.",
                 "What time is it?",
                 "It will take time.",
-                "We reorganized the teimetable.",
+                "We reorganized the timetable.",
             };
-            string wPattern = @"[Tt]ime";
+            string wPattern = @"\b[Tt]ime\b";
             foreach (string wText in wTexts) {
                 if (Regex.IsMatch(wText, wPattern)) {
                     Console.WriteLine(wText);
-                    foreach (Match MatchedWord in Regex.Matches(wText, wPattern)) {
-                        Console.WriteLine($"開始位置：{MatchedWord.Index,3}");
+                    foreach (Match wMatchedWord in Regex.Matches(wText, wPattern)) {
+                        Console.WriteLine($"開始位置：{wMatchedWord.Index,3}");
                     }
                 }
             }
