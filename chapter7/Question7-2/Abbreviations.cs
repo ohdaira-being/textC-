@@ -3,10 +3,12 @@ using System.IO;
 using System.Linq;
 
 namespace Question7_2 {
+
     /// <summary>
     /// 略語と対応する日本語を管理するクラス
     /// </summary>
     class Abbreviations {
+
         /// <summary>
         /// 読み込んだファイルからキーと値を取得するディクショナリ
         /// </summary>
@@ -32,18 +34,14 @@ namespace Question7_2 {
         /// </summary>
         /// <param name="vRemoveText">省略語</param>
         /// <returns>削除後のディクショナリDict</returns>
-        public bool Remove(string vRemoveText) {
-            return FDict.Remove(vRemoveText);
-        }
+        public bool Remove(string vRemoveText) => FDict.Remove(vRemoveText);
 
         /// <summary>
         /// 要素を追加
         /// </summary>
         /// <param name="vAbbr">ディクショナリDictに追加するキー</param>
         /// <param name="vJapanese">ディクショナリDictに追加する値</param>
-        public void Add(string vAbbr, string vJapanese) {
-            FDict[vAbbr] = vJapanese;
-        }
+        public void Add(string vAbbr, string vJapanese) => FDict[vAbbr] = vJapanese;
 
         /// <summary>
         /// インデクサ
@@ -57,9 +55,7 @@ namespace Question7_2 {
         /// </summary>
         /// <param name="vJapanese">検索する値</param>
         /// <returns>ディクショナリDictの値[vJapanese]に対応する値。なければ、nullを返す。</returns>
-        public string ToAddreviations(string vJapanese) {
-            return FDict.FirstOrDefault(x => x.Value == vJapanese).Key;
-        }
+        public string ToAddreviations(string vJapanese) => FDict.FirstOrDefault(x => x.Value == vJapanese).Key;
 
         /// <summary>
         /// 日本語の一部を引数に与え、それが含まれる要素(Key, Value)を全て取り出す
@@ -80,8 +76,8 @@ namespace Question7_2 {
         /// <param name="vCharNums">文字数int</param>
         /// <returns>指定された文字数のKeyを持ったディクショナリの要素を全て返す。</returns>
         public IEnumerable<KeyValuePair<string, string>> FindDictAtCharNums(int vCharNums) {
-            foreach (KeyValuePair<string, string> wDict in FDict.Where(x => x.Key.Length == vCharNums)) {
-                yield return wDict;
+            foreach (KeyValuePair<string, string> wItem in FDict.Where(x => x.Key.Length == vCharNums)) {
+                yield return wItem;
             }
         }
     }
