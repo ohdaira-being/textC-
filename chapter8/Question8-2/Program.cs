@@ -10,10 +10,7 @@ namespace Question8_2 {
         /// <param name="vDate">今日の日付</param>
         /// <param name="vDayOfWeek">指定曜日</param>
         /// <returns>次週の指定曜日の日にち</returns>
-        public static DateTime NextDayOfWeek(DateTime vDate, DayOfWeek vDayOfWeek) {
-            int wElapsedDays = (7 - (int)vDate.DayOfWeek) + (int)vDayOfWeek;
-            return vDate.AddDays(wElapsedDays);
-        }
+        public static DateTime NextDayOfWeek(DateTime vDate, DayOfWeek vDayOfWeek) => vDate.AddDays(7 - (int)vDate.DayOfWeek + (int)vDayOfWeek);
 
         static void Main(string[] args) {
             //NextWeekDayメソッドの利用
