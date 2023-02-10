@@ -37,10 +37,10 @@ namespace Question7_2 {
         public bool Remove(string vRemoveText) => FDict.Remove(vRemoveText);
 
         /// <summary>
-        /// 要素を追加
+        /// 読み込んだファイルからキーと値を取得したディクショナリwDictに省略語をキー、正式名称を値とした要素を追加する
         /// </summary>
-        /// <param name="vAbbr">ディクショナリDictに追加するキー</param>
-        /// <param name="vJapanese">ディクショナリDictに追加する値</param>
+        /// <param name="vAbbr">省略語</param>
+        /// <param name="vJapanese">正式名称</param>
         public void Add(string vAbbr, string vJapanese) => FDict[vAbbr] = vJapanese;
 
         /// <summary>
@@ -51,14 +51,14 @@ namespace Question7_2 {
         public string this[string vAbbr] => FDict.ContainsKey(vAbbr) ? FDict[vAbbr] : null;
 
         /// <summary>
-        /// 日本語から対応する省略語を取り出す
+        /// 正式名称から対応する省略語を取り出す
         /// </summary>
         /// <param name="vJapanese">検索する値</param>
         /// <returns>ディクショナリDictの値[vJapanese]に対応する値。なければ、nullを返す。</returns>
         public string ToAddreviations(string vJapanese) => FDict.FirstOrDefault(x => x.Value == vJapanese).Key;
 
         /// <summary>
-        /// 日本語の一部を引数に与え、それが含まれる要素(Key, Value)を全て取り出す
+        /// 正式名称の一部を引数に与え、それが含まれる要素(Key, Value)を全て取り出す
         /// </summary>
         /// <param name="vSubstring">検索するワード</param>
         /// <returns>値に検索ワードを含む全てのディクショナリの要素を返す。</returns>
