@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace Question11_1 {
 
@@ -12,31 +13,47 @@ namespace Question11_1 {
 
     class Program {
         static void Main(string[] args) {
-            XDocument wXdoc = XDocument.Load("../../../../BallSports.xml");//ファイルが見つからないと例外になってしまう
 
-            //1.の回答
-            foreach (XElement wXlist in wXdoc.Root.Elements()) {
-                Console.WriteLine($"競技名：{wXlist.Element("name").Value}→{wXlist.Element("teammenbers").Value}人");
+            string wFilePath = "../../../../BallSports.xml";
+
+            // BallSports.xmlファイルがなければ、作成する。
+            Console.WriteLine("BallSports.xmlファイルを作成、または、初期状態に戻しますか？\nはい　→　Y\nいいえ　→　Y以外の任意のキー");
+            if (Console.ReadLine() == "Y") BallsportList.CreateBallSports(wFilePath);
+
+            // BallSports.xmlファイルがなければ、強制終了させる。
+            if (!File.Exists(wFilePath)) {
+                Console.WriteLine("参照するファイルがないので、終了しました。");
+                return;
             }
 
-            //2.の回答
-            foreach (XElement wXListOrderByFirstplayed in wXdoc.Root.Elements().OrderBy(x => (int)(x.Element("firstplayed")))) {
-                Console.WriteLine($"{wXListOrderByFirstplayed.Element("name").Attribute("kanji").Value}");
+            // BallSports.xmlファイルを読み込んでwBallsportListsに格納する。
+            IEnumerable<BallsportList> wBallsportLists = BallsportList.ReadBallsportLists(wFilePath);
+
+            // 1.の回答
+            Console.WriteLine("\n問題1の回答（競技名とチームメンバー数の一覧）");
+            foreach (var wXList in wBallsportLists) {
+                Console.WriteLine($"競技名：{wXList.Name}→{wXList.Teammembers}人");
             }
 
-            //3.の回答
-            foreach (XElement wXMaxMenberSport in wXdoc.Root.Elements().OrderByDescending(x => (int)(x.Element("teammenbers"))).Take(1)) {
-                Console.WriteLine(wXMaxMenberSport.Element("name").Value);
+            // 2.の回答
+            Console.WriteLine("\n問題2の回答（最初にプレイされた年の若い順）");
+            foreach (var wXList in wBallsportLists.OrderBy(x => (int)(x.Firstplayed))) {
+                Console.WriteLine($"{wXList.KanjiName}");
             }
 
-            //4.の回答
-            XElement wSoccerElement = new XElement("ballsport",
-                       new XElement("name", "フットボール", new XAttribute("kanji", "蹴球")),
-                       new XElement("teammenbers", "11"),
-                       new XElement("firstplayed", "1863")
-            );
-            wXdoc.Root.Add(wSoccerElement);
-            wXdoc.Save("../../../../BallSports.xml");
+            // 3.の回答
+            Console.WriteLine("\n問題3の回答（メンバー人数が最も多い競技名）");
+            foreach (var wXList in wBallsportLists) {
+                if (!(wXList.Teammembers == wBallsportLists.Max(x => x.Teammembers))) continue;
+                Console.WriteLine(wXList.Name);
+            }
+
+            // 4.の回答
+            Console.WriteLine("\nBallSports.xmlファイルにサッカーのデータを追加しますか？\nはい　→　Y\nいいえ　→　Y以外の任意のキー");
+            if (Console.ReadLine() == "Y") {
+                string[] wSoccerData = { "ballsport", "フットボール", "蹴球", "11", "1863" };
+                BallsportList.AddBallSport(wSoccerData, wFilePath);
+            }
         }
     }
 }
