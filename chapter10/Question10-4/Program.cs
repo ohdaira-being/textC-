@@ -13,7 +13,7 @@ namespace Question10_4 {
     class Program {
         static void Main(string[] args) {
 
-            string wFilePath = @"C:\Users\ohdaira\Desktop\C#成果物\idiom\chapter10\Sample10-4.txt";
+            string wFilePath = @"../../../../Sample10-4.txt";
             var wReplacedTexts = new List<string>();
 
             foreach (string wLine in File.ReadLines(wFilePath)) {
