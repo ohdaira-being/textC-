@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -18,7 +17,6 @@ namespace Question11_2 {
         static void Main(string[] args) {
 
             var wXdoc = XDocument.Load("../../../../Sample11-2.xml");
-
             // ファイルから読み込んだタグ名とタグ要素をペアとして、ディクショナリwDictに格納する
             Dictionary<string, string> wDict = wXdoc.Root.Elements().Select(x => new {
                 Key = x.Element("kanji").Value,
@@ -32,43 +30,29 @@ namespace Question11_2 {
                     new XAttribute("yomi", x.Value)
                 ))
             );
-
-            // 保存
+            // 保存する。
             wXNewDoc.Save("../../../../NewSample11-2.xml");
 
 
-            // 追加
-            string vFilePath = "../../../../NewSample11-3.xml";
 
-            XDocument wXnewdoca = XDocument.Load(vFilePath);
+            // 追加問題
+            // 追加先ファイル名
+            string wFilePath = "../../../../NewSample11-3.xml";
+
+            //　XMLファイルを作成する
+            XElement wXNewDocForAdditional = new XElement("difficultkanji");
+            wXNewDocForAdditional.Save(wFilePath);
+
+            // 作成した追加ファイルに内容を追加する
+            XDocument wXNewdoc = XDocument.Load(wFilePath);
             foreach (var item in wDict) {
                 var wWord = new XElement("word");
                 wWord.SetAttributeValue("kanji", item.Key);
                 wWord.SetAttributeValue("yomi", item.Value);
 
-                wXnewdoca.Root.Add(new XElement("difficultkanji", wWord));
-                wXnewdoca.Save(vFilePath);
+                wXNewdoc.Root.Add(new XElement(wWord));
+                wXNewdoc.Save(wFilePath);
             }
-
-            //var wWord = new XElement("word");
-            //string ddd = "../../../../NewSample11-3.xml";
-
-            //wWord.SetAttributeValue("kanji", "鬼灯");
-            //wWord.SetAttributeValue("yomi", "ほおずき");
-            //XDocument.Load(ddd).Root.Add("difficultkanji", wWord);
-            //XDocument.Load(ddd).Save(ddd);
-
-            //wWord.SetAttributeValue("kanji", "暖簾");
-            //wWord.SetAttributeValue("yomi", "のれん");
-            //new XElement("difficultkanji", wWord).Save("../../../../NewSample11-3.xml");
-
-            //wWord.SetAttributeValue("kanji", "杜撰");
-            //wWord.SetAttributeValue("yomi", "ずさん");
-            //new XElement("difficultkanji", wWord).Save("../../../../NewSample11-3.xml");
-
-            //wWord.SetAttributeValue("kanji", "坩堝");
-            //wWord.SetAttributeValue("yomi", "るつぼ");
-            //new XElement("difficultkanji", wWord).Save("../../../../NewSample11-3.xml");
         }
     }
 }
