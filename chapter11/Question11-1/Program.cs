@@ -58,19 +58,26 @@ namespace Question11_1 {
 
         static void Main(string[] args) {
 
-            var wBasketball = new BallSport("バスケットボール", "籠玉", 5, 1891);
-            var wVolleyball = new BallSport("バレーボール", "排球", 6, 1895);
-            var wBaseball = new BallSport("ベースボール", "野球", 9, 1846);
+            // BallSportのインスタンス生成
+            var wBallSports = new BallSport[]{
+            new BallSport("バスケットボール", "籠玉", 5, 1891),
+            new BallSport("バレーボール", "排球", 6, 1895),
+            new BallSport("ベースボール", "野球", 9, 1846),
+            };
 
+            // BallSportCollectionのインスタンス生成
+            var wBallSportCollection = new BallSportCollection(wBallSports);
+
+            // ファイルパス
             string wFilePath = "../../../../BallSports.xml";
 
 
             // BallSports.xmlファイルがなければ、作成する。
             Console.WriteLine("BallSports.xmlファイルを作成、または、初期状態に戻しますか？\nはい　→　Y\nいいえ　→　Y以外の任意のキー");
             if (Console.ReadLine() == "Y") {
-                AddBallSport(wBasketball, wFilePath);
-                AddBallSport(wVolleyball, wFilePath);
-                AddBallSport(wBaseball, wFilePath);
+                foreach (var wBallSport in wBallSportCollection.BallSports) {
+                    AddBallSport(wBallSport, wFilePath);
+                }
             }
 
             // BallSports.xmlファイルを読み込んでwBallsportListsに格納する。
