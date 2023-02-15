@@ -45,8 +45,8 @@ namespace Question11_1 {
             // BallSports.xmlファイルがなければ、作成する。
             if (!File.Exists(vFilePath)) {
                 var wBallSports = new XElement("ballsports", "");
-                XDocument aaa = new XDocument(wBallSports);
-                aaa.Save(vFilePath);
+                XDocument wInitialData = new XDocument(wBallSports);
+                wInitialData.Save(vFilePath);
             }
 
             XElement wAddData = new XElement(BallSport.ToXElement(vBallSportData));
