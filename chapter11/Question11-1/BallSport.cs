@@ -41,7 +41,6 @@ namespace Question11_1 {
             this.Firstplayed = vFirstplayed;
         }
 
-        // BallSportのインスタンスを受け取り、XElement型を返すメソッド
         /// <summary>
         /// BallSportインスタンスを受け取り、XElement型にして返すメソッド
         /// </summary>
@@ -52,7 +51,7 @@ namespace Question11_1 {
                        new XElement("name", vBallSport.Name, new XAttribute("kanji", vBallSport.KanjiName)),
                        new XElement("teammembers", vBallSport.Teammembers),
                        new XElement("firstplayed", vBallSport.Firstplayed)
-            );
+                   );
         }
     }
 }

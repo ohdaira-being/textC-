@@ -30,20 +30,15 @@ namespace Question11_2 {
                     new XAttribute("yomi", x.Value)
                 ))
             );
-            // 保存する。
+
             wXNewDoc.Save("../../../../NewSample11-2.xml");
 
-
-
             // 追加問題
-            // 追加先ファイル名
             string wFilePath = "../../../../NewSample11-3.xml";
 
-            //　XMLファイルを作成する
             XElement wXNewDocForAdditional = new XElement("difficultkanji");
             wXNewDocForAdditional.Save(wFilePath);
 
-            // 作成した追加ファイルに内容を追加する
             XDocument wXNewdoc = XDocument.Load(wFilePath);
             foreach (var item in wDict) {
                 var wWord = new XElement("word");
