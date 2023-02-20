@@ -5,30 +5,29 @@ using System.Xml.Serialization;
 namespace Question12_2 {
 
     /// <summary>
-    /// Novelistクラス
+    /// 小説家クラス
     /// </summary>
     [XmlRoot("novelist")]
     [DataContract(Name = "novelist")]
     public class Novelist {
 
         /// <summary>
-        /// Nameプロパティ
+        /// 小説家の名前プロパティ
         /// </summary>
         [DataMember(Name = "name")]
         [XmlElement(ElementName = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Birthプロパティ
+        /// 小説家の誕生日プロパティ
         /// </summary>
         [DataMember(Name = "birth")]
         [XmlElement(ElementName = "birth")]
         public DateTime Birth { get; set; }
 
         /// <summary>
-        /// Masterpiecesプロパティ
+        /// 小説家の名作集プロパティ
         /// </summary>
-        //[XmlElement(Type = typeof(Masterpiece), ElementName = "masterpieces")]
         [DataMember(Name = "masterpieces")]
         [XmlArray("masterpieces")]
         [XmlArrayItem("masterpiece", typeof(Masterpiece))]

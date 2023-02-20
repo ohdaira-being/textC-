@@ -4,19 +4,17 @@ using System.Xml.Serialization;
 namespace Question12_2 {
 
     /// <summary>
-    /// NovelistCollectionクラス
+    /// 小説家集クラス
     /// </summary>
     [DataContract(Name = "novelistcollection")]
     [XmlRoot("novelists")]
     public class NovelistCollection {
 
         /// <summary>
-        /// Novelistsプロパティ
+        /// 小説家集プロパティ
         /// </summary>
         [XmlElement(Type = typeof(Novelist), ElementName = "novelist")]
         [DataMember(Name = "novelist")]
-        //[XmlArray("novelistCollection")]
-        //[XmlArrayItem("novelists", typeof(Novelist))]
         public Novelist[] Novelists { get; set; }
 
         /// <summary>

@@ -22,21 +22,17 @@ namespace Question12_1 {
 
     public class Program {
         static void Main(string[] args) {
-
-            // Employeeクラスのインスタンス生成
-            var wEmployee = new Employee[] {
+            var wBeingEmployee = new Employee[] {
                 new Employee(00917, "大平", new DateTime(2022, 4, 1)),
                 new Employee(00999, "高松", new DateTime(2022,4,1))
             };
-
-            // EmployeeCollectionクラスのインスタンス生成
-            var wEmployeeCollection = new EmployeeCollection(wEmployee);
+            var wEmployeeCollection = new EmployeeCollection(wBeingEmployee);
 
             // 改行、インデントを設定する
             var wXmlSettings = new XmlWriterSettings {
                 Encoding = new System.Text.UTF8Encoding(false),
                 Indent = true,
-                IndentChars = " ",
+                IndentChars = "  ",
             };
 
             // 問題1-1 保存先のファイルパス
@@ -51,9 +47,9 @@ namespace Question12_1 {
             // 問題1-1 逆シリアル化するコード
             using (var wReader = XmlReader.Create(wFilePath1)) {
                 var wSerializer = new XmlSerializer(typeof(EmployeeCollection));
-                foreach (Employee wLoadedEmployee in (wSerializer.Deserialize(wReader) as EmployeeCollection).Employees) {
+                foreach (Employee wEmployee in ((EmployeeCollection)wSerializer.Deserialize(wReader)).Employees) {
                     Console.WriteLine(
-                        $"[Id={wLoadedEmployee.Id},Name={wLoadedEmployee.Name},HireDate={wLoadedEmployee.HireDate.ToString("D")}]"
+                        $"[Id={wEmployee.Id},Name={wEmployee.Name},HireDate={wEmployee.HireDate.ToString("D")}]"
                         );
                 }
             }
@@ -70,9 +66,9 @@ namespace Question12_1 {
             // 問題1-3 逆シリアル化するコード
             using (var wReader = XmlReader.Create(wFilePath2)) {
                 var wSerializer = new DataContractSerializer(typeof(EmployeeCollection));
-                foreach (Employee wLoadedEmployee in (wSerializer.ReadObject(wReader) as EmployeeCollection).Employees) {
+                foreach (Employee wEmployee in ((EmployeeCollection)wSerializer.ReadObject(wReader)).Employees) {
                     Console.WriteLine(
-                        $"[Id：{wLoadedEmployee.Id},Name：{wLoadedEmployee.Name},HireDate：{wLoadedEmployee.HireDate.ToString("D")}]"
+                        $"[Id：{wEmployee.Id},Name：{wEmployee.Name},HireDate：{wEmployee.HireDate.ToString("D")}]"
                         );
                 }
             }

@@ -3,13 +3,13 @@
 namespace Question12_2 {
 
     /// <summary>
-    /// Masterpiecesクラス
+    /// 名作クラス
     /// </summary>
     [XmlRoot("masterpiece")]
     public class Masterpiece {
 
         /// <summary>
-        /// Titleプロパティ
+        /// 名作タイトルプロパティ
         /// </summary>
         [XmlElement(ElementName ="title")]
         public string Title { get; set; }

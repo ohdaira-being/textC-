@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Linq;
 
 namespace Question12_2 {
 
@@ -15,19 +14,13 @@ namespace Question12_2 {
 
     public class Program {
         static void Main(string[] args) {
-
-            // Masterpiecesクラスのインスタンス生成
             Masterpiece[] wMasterpieces = new Masterpiece[]{
                 new Masterpiece("2001年宇宙の旅"),
                 new Masterpiece("幼少期の終り")
             };
-
-            // Novelistクラスのインスタンス生成
             Novelist[] wNovelists = new Novelist[]{
-                new Novelist("アーサー・C・クラーク",new DateTime(1917,12,16),wMasterpieces)
+                new Novelist("アーサー・C・クラーク", new DateTime(1917,12,16), wMasterpieces)
             };
-
-            // NovelistCollectionクラスのインスタンス生成
             var wNovelistCollection = new NovelistCollection(wNovelists);
 
             // 改行、インデントを設定する
@@ -55,7 +48,7 @@ namespace Question12_2 {
                 wDeserializedXml = wSerializer.Deserialize(wReader) as NovelistCollection;
             }
 
-            // 問題2-2 XMLファイルのファイルパス
+            // 問題2-2 Jsonファイルのファイルパス
             string wJsonFilePath = @"../../../../Novelist.json";
 
             // 問題2-2 形式を揃えるための条件
