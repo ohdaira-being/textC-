@@ -34,10 +34,8 @@ namespace Question11_1 {
                 wInitialData.Save(vFilePath);
             }
 
-            XElement wAddData = new XElement(vBallSportData.ToXElement());
             XDocument wXdoc = XDocument.Load(vFilePath);
-
-            wXdoc.Root.Add(wAddData);
+            wXdoc.Root.Add(vBallSportData.ToXElement());
             wXdoc.Save(vFilePath);
         }
 
