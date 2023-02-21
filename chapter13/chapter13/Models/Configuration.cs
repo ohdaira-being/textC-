@@ -7,7 +7,7 @@ namespace chapter13.Models {
     internal sealed class Configuration : DbMigrationsConfiguration<BooksDbContext> {
 
         /// <summary>
-        /// 自動マイグレーションを可能にするメソッド
+        /// コンストラクタ
         /// </summary>
         public Configuration() {
             AutomaticMigrationsEnabled = true;
