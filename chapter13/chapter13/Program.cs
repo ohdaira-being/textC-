@@ -112,26 +112,32 @@ namespace chapter13 {
         // Bookテーブルに著者と書籍のデータを追加する
         private static void AddBooks(Book vBook) {
             using (var wDb = new BooksDbContext()) {
+
                 // vBookがAuthorをもつ場合
-                if (vBook.Publisher == null) {
-                    // DBに登録済の著者とヒットしなかった場合
-                    if (wDb.Authors.All(x => x.Name != vBook.Author.Name)) {
-                        wDb.Books.Add(vBook);
-                        // DBに登録済みの著書とヒットした場合
-                    } else {
+                if (vBook.Author != null) {
+
+                    // DBに登録済みの著書とヒットした場合
+                    if (wDb.Authors.All(x => x.Name == vBook.Author.Name)) {
                         Author wAuthor = wDb.Authors.Single(x => x.Name == vBook.Author.Name);
                         vBook.Author = wAuthor;
                         wDb.Books.Add(vBook);
+
+                        // DBに登録済の著者とヒットしなかった場合
+                    } else {
+                        wDb.Books.Add(vBook);
                     }
+
                     // vBookがAuthorを持たず、Publisherを持つ場合
                 } else {
-                    // DBに登録済みの著書とヒットしなかった場合
-                    if (wDb.Authors.All(x => x.Name != vBook.Publisher)) {
-                        wDb.Books.Add(vBook);
-                        // DBに登録済みの著書とヒットした場合
-                    } else {
+
+                    // DBに登録済みの著書とヒットした場合
+                    if (wDb.Authors.All(x => x.Name == vBook.Publisher)) {
                         Author wAuthor = wDb.Authors.Single(x => x.Name == vBook.Publisher);
                         vBook.Author = wAuthor;
+                        wDb.Books.Add(vBook);
+
+                        // DBに登録済みの著書とヒットしなかった場合
+                    } else {
                         wDb.Books.Add(vBook);
                     }
                 }
