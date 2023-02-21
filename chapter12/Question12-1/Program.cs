@@ -32,7 +32,6 @@ namespace Question12_1 {
             var wXmlSettings = new XmlWriterSettings {
                 Encoding = new System.Text.UTF8Encoding(false),
                 Indent = true,
-                IndentChars = "  ",
             };
 
             // 問題1-1 保存先のファイルパス
