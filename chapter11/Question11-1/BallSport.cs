@@ -20,7 +20,7 @@ namespace Question11_1 {
         /// <summary>
         /// チーム人数プロパティ
         /// </summary>
-        public int Teammembers { get; set; }
+        public int MemberCount { get; set; }
 
         /// <summary>
         /// 最初にプレイした年プロパティ
@@ -37,7 +37,7 @@ namespace Question11_1 {
         public BallSport(string vName, string vKanjiName, int vTeammembers, int vFirstplayed) {
             this.Name = vName;
             this.KanjiName = vKanjiName;
-            this.Teammembers = vTeammembers;
+            this.MemberCount = vTeammembers;
             this.Firstplayed = vFirstplayed;
         }
 
@@ -49,7 +49,7 @@ namespace Question11_1 {
         public static XElement ToXElement(BallSport vBallSport) {
             return new XElement("ballsport",
                 new XElement("name", vBallSport.Name, new XAttribute("kanji", vBallSport.KanjiName)),
-                new XElement("teammembers", vBallSport.Teammembers),
+                new XElement("teammembers", vBallSport.MemberCount),
                 new XElement("firstplayed", vBallSport.Firstplayed)
                 );
         }

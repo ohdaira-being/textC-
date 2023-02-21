@@ -18,17 +18,17 @@ namespace Question11_1 {
         /// </summary>
         /// <param name="vFilePath">ファイルのパス</param>
         /// <returns>読み込んだファイルの全てのBallSportのプロパティを配列化</returns>
-        public static IEnumerable<BallSport> ReadXFileToBallsports(string vFilePath) {
+        public static IEnumerable<BallSport> ReadFileToBallsports(string vFilePath) {
             // ファイルが見つからないと例外になってしまう
             XDocument wXdoc = XDocument.Load(vFilePath);
-            BallSport[] wReadedBallSports = wXdoc.Root.Elements()
+            BallSport[] wBallSports = wXdoc.Root.Elements()
                                             .Select(x => new BallSport(
                                                  (string)x.Element("name"),
                                                  (string)x.Element("name").Attribute("kanji"),
                                                  (int)x.Element("teammembers"),
                                                  (int)x.Element("firstplayed")
                                             )).ToArray();
-            return wReadedBallSports;
+            return wBallSports;
         }
 
         /// <summary>
@@ -68,24 +68,24 @@ namespace Question11_1 {
                 }
             }
 
-            IEnumerable<BallSport> wBallsports = ReadXFileToBallsports(wFilePath);
+            IEnumerable<BallSport> wFileBallSports = ReadFileToBallsports(wFilePath);
 
             // 1.の回答
             Console.WriteLine("\n問題1の回答（競技名とチームメンバー数の一覧）");
-            foreach (var wBallSport in wBallsports) {
-                Console.WriteLine($"競技名：{wBallSport.Name}→{wBallSport.Teammembers}人");
+            foreach (var wBallSport in wFileBallSports) {
+                Console.WriteLine($"競技名：{wBallSport.Name}→{wBallSport.MemberCount}人");
             }
 
             // 2.の回答
             Console.WriteLine("\n問題2の回答（最初にプレイされた年の若い順）");
-            foreach (var wBallSport in wBallsports.OrderBy(x => (int)(x.Firstplayed))) {
+            foreach (var wBallSport in wFileBallSports.OrderBy(x => (int)(x.Firstplayed))) {
                 Console.WriteLine($"{wBallSport.KanjiName}");
             }
 
             // 3.の回答
             Console.WriteLine("\n問題3の回答（メンバー人数が最も多い競技名）");
-            foreach (var wBallSport in wBallsports) {
-                if (!(wBallSport.Teammembers == wBallsports.Max(x => x.Teammembers))) continue;
+            int wMaxCount = wFileBallSports.Max(x => x.MemberCount);
+            foreach (var wBallSport in wFileBallSports.Where(x => x.MemberCount == wMaxCount)) {
                 Console.WriteLine(wBallSport.Name);
             }
 
