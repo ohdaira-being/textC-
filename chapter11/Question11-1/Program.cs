@@ -13,12 +13,7 @@ namespace Question11_1 {
     //4.サッカーの情報を追加して、新たなXMLファイルに出力してください。ファイル名は特に問いません。
 
     class Program {
-        /// <summary>
-        /// vFilePathを読み込み、全てのBallsportのプロパティを配列にして返すメソッド
-        /// </summary>
-        /// <param name="vFilePath">ファイルのパス</param>
-        /// <returns>読み込んだファイルの全てのBallSportのプロパティを配列化</returns>
-        public static IEnumerable<BallSport> ReadFileToBallsports(string vFilePath) {
+        private static IEnumerable<BallSport> ReadBallSportsFile(string vFilePath) {
             // ファイルが見つからないと例外になってしまう
             XDocument wXdoc = XDocument.Load(vFilePath);
             BallSport[] wBallSports = wXdoc.Root.Elements()
@@ -31,12 +26,7 @@ namespace Question11_1 {
             return wBallSports;
         }
 
-        /// <summary>
-        /// vFilePathに追加で書き込むメソッド
-        /// </summary>
-        /// <param name="vBallSportData">追加するBallSport</param>
-        /// <param name="vFilePath">書き込み先のファイルパス</param>
-        public static void AddBallSport(BallSport vBallSportData, string vFilePath) {
+        private static void AddBallSport(BallSport vBallSportData, string vFilePath) {
             // BallSports.xmlファイルがなければ、作成する。
             if (!File.Exists(vFilePath)) {
                 var wBallSports = new XElement("ballsports", "");
@@ -44,7 +34,7 @@ namespace Question11_1 {
                 wInitialData.Save(vFilePath);
             }
 
-            XElement wAddData = new XElement(BallSport.ToXElement(vBallSportData));
+            XElement wAddData = new XElement(vBallSportData.ToXElement());
             XDocument wXdoc = XDocument.Load(vFilePath);
 
             wXdoc.Root.Add(wAddData);
@@ -68,7 +58,7 @@ namespace Question11_1 {
                 }
             }
 
-            IEnumerable<BallSport> wFileBallSports = ReadFileToBallsports(wFilePath);
+            IEnumerable<BallSport> wFileBallSports = ReadBallSportsFile(wFilePath);
 
             // 1.の回答
             Console.WriteLine("\n問題1の回答（競技名とチームメンバー数の一覧）");
@@ -78,7 +68,7 @@ namespace Question11_1 {
 
             // 2.の回答
             Console.WriteLine("\n問題2の回答（最初にプレイされた年の若い順）");
-            foreach (var wBallSport in wFileBallSports.OrderBy(x => (int)(x.Firstplayed))) {
+            foreach (var wBallSport in wFileBallSports.OrderBy(x => (int)(x.FirstPlayed))) {
                 Console.WriteLine($"{wBallSport.KanjiName}");
             }
 
@@ -92,8 +82,7 @@ namespace Question11_1 {
             // 4.の回答
             Console.WriteLine("\nBallSports.xmlファイルにサッカーのデータを追加しますか？\nはい　→　Y\nいいえ　→　Y以外の任意のキー");
             if (Console.ReadLine() == "Y") {
-                BallSport wSoccer = new BallSport("フットボール", "蹴球", 11, 1863);
-                AddBallSport(wSoccer, wFilePath);
+                AddBallSport(new BallSport("フットボール", "蹴球", 11, 1863), wFilePath);
             }
         }
     }

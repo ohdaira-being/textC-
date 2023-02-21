@@ -25,32 +25,31 @@ namespace Question11_1 {
         /// <summary>
         /// 最初にプレイした年プロパティ
         /// </summary>
-        public int Firstplayed { get; set; }
+        public int FirstPlayed { get; set; }
 
         /// <summary>
         /// BallSportのコンストラクタ
         /// </summary>
         /// <param name="vName">競技名</param>
         /// <param name="vKanjiName">競技名の漢字名称</param>
-        /// <param name="vTeammembers">チーム人数</param>
-        /// <param name="vFirstplayed">最初にプレイした年</param>
-        public BallSport(string vName, string vKanjiName, int vTeammembers, int vFirstplayed) {
+        /// <param name="vMemberCount">チーム人数</param>
+        /// <param name="vFirstPlayed">最初にプレイした年</param>
+        public BallSport(string vName, string vKanjiName, int vMemberCount, int vFirstPlayed) {
             this.Name = vName;
             this.KanjiName = vKanjiName;
-            this.MemberCount = vTeammembers;
-            this.Firstplayed = vFirstplayed;
+            this.MemberCount = vMemberCount;
+            this.FirstPlayed = vFirstPlayed;
         }
 
         /// <summary>
-        /// BallSportインスタンスを受け取り、XElement型にして返すメソッド
+        /// XElement型にして返すメソッド
         /// </summary>
-        /// <param name="vBallSport">BallSport</param>
-        /// <returns></returns>
-        public static XElement ToXElement(BallSport vBallSport) {
+        /// <returns>XElement</returns>
+        public XElement ToXElement() {
             return new XElement("ballsport",
-                new XElement("name", vBallSport.Name, new XAttribute("kanji", vBallSport.KanjiName)),
-                new XElement("teammembers", vBallSport.MemberCount),
-                new XElement("firstplayed", vBallSport.Firstplayed)
+                new XElement("name", Name, new XAttribute("kanji", KanjiName)),
+                new XElement("teammembers", MemberCount),
+                new XElement("firstplayed", FirstPlayed)
                 );
         }
     }
