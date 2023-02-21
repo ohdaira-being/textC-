@@ -45,12 +45,10 @@ namespace Question11_1 {
         /// XElement型にして返すメソッド
         /// </summary>
         /// <returns>XElement</returns>
-        public XElement ToXElement() {
-            return new XElement("ballsport",
-                new XElement("name", Name, new XAttribute("kanji", KanjiName)),
-                new XElement("teammembers", MemberCount),
-                new XElement("firstplayed", FirstPlayed)
+        public XElement ToXElement() => new XElement("ballsport",
+                new XElement("name", this.Name, new XAttribute("kanji", this.KanjiName)),
+                new XElement("teammembers", this.MemberCount),
+                new XElement("firstplayed", this.FirstPlayed)
                 );
-        }
     }
 }
