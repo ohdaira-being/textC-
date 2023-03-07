@@ -22,9 +22,8 @@ namespace chapter13 {
     class Program {
 
         static void Main(string[] args) {
-            InitializBooks();
+            InitializeBooks();
             InitializAuthors();
-
 
             var wSosekiNatsume = new Author("夏目漱石", new DateTime(1867, 2, 9), "男性");
             var wOsamuDazai = new Author("太宰治", new DateTime(1909, 6, 19), "男性");
@@ -37,45 +36,45 @@ namespace chapter13 {
             var wYasunariKawabata = new Author("川端康成", new DateTime(1899, 6, 14), "男性");
             AddAuthor(wKanKikuchi);
             AddAuthor(wYasunariKawabata);
-
-            AddBooks(new Book("こころ", 1991, "夏目漱石"));
-            AddBooks(new Book("伊豆の踊子", 2003, wYasunariKawabata));
-            AddBooks(new Book("真珠夫人", 2002, wKanKikuchi));
-            AddBooks(new Book("注文の多い料理店", 2000, wKenjiMiyazawa));
-
-            // DBに追加する（テキスト参考）
-            AddBooks(new Book("ワンピース", 2000, wSosekiNatsume));
-            AddBooks(new Book("坊ちゃん", 2003, wSosekiNatsume));
-            AddBooks(new Book("人間失格", 1990, wOsamuDazai));
-            AddBooks(new Book("111", 1212, "2222"));
-            AddBooks(new Book("みだれ髪", 2000, wAkikoYosano));
-            AddBooks(new Book("銀河鉄道の夜", 1989, wKenjiMiyazawa));
-
+            AddBooks(new Book("こころ", 1991, "夏目漱石", null));
+            AddBooks(new Book("伊豆の踊子", 2003, null, wYasunariKawabata));
+            AddBooks(new Book("真珠夫人", 2002, null, wKanKikuchi));
+            AddBooks(new Book("注文の多い料理店", 2000, null, wKenjiMiyazawa));
+            AddBooks(new Book("ワンピース", 2000, null, wSosekiNatsume));
+            AddBooks(new Book("坊ちゃん", 2003, null, wSosekiNatsume));
+            AddBooks(new Book("人間失格", 1990, null, wOsamuDazai));
+            AddBooks(new Book("111", 1212, "2222", null));
+            AddBooks(new Book("みだれ髪", 2000, null, wAkikoYosano));
+            AddBooks(new Book("銀河鉄道の夜", 1989, null, wKenjiMiyazawa));
+            AddBooks(new Book("ワン", 2000, null, wSosekiNatsume));
+            AddBooks(new Book("ワン222", 2000, "夏目漱石", null));
             // 2. の回答
+            Console.WriteLine("\n～問題２の回答～");
             DisplayAllBooks();
             DisplayAllAuthors();
 
-
             // 3. の回答
             using (var wDb = new BooksDbContext()) {
+                Console.WriteLine("\n～問題３の回答～");
                 foreach (Book wBook in wDb.Books) {
                     if (wBook.Title.Length == wDb.Books.Max(x => x.Title.Length)) Console.WriteLine(wBook.Title);
                 }
-            }
 
-            // 4. の回答
-            using (var wDb = new BooksDbContext()) {
+
+                // 4. の回答
+                Console.WriteLine("\n～問題４の回答～");
                 foreach (Book wBook in wDb.Books.OrderBy(x => x.PublishedYear).Take(3)) {
-                    Console.WriteLine($"タイトル：{wBook.Title} 著者名：{ wBook.Author?.Name ?? wBook.Publisher }");
-                }
-            }
+                    Console.WriteLine($"タイトル：{wBook.Title}　著者名：{ wBook.Author?.Name ?? wBook.Publisher }");
 
-            // 5. の回答
-            using (var wDb = new BooksDbContext()) {
+                }
+
+                // 5. の回答
+                Console.WriteLine("\n～問題５の回答～");
                 foreach (Author wAuthor in wDb.Authors.OrderBy(x => x.Birthday)) {
                     Console.WriteLine($"【{wAuthor.Name}】");
                     foreach (Book wBook in wDb.Books.Where(x => x.Author.Name == wAuthor.Name)) {
                         Console.WriteLine($"　・タイトル：{wBook.Title}　発行年：{wBook.PublishedYear}");
+
                     }
                 }
             }
@@ -85,10 +84,10 @@ namespace chapter13 {
         // 全てのBookを読み込み、出力する
         static void DisplayAllBooks() {
             using (var wDb = new BooksDbContext()) {
-                string wNoAuthorMessage = "著書のデータがありません。";
+                string wNoAuthorMessage = "著書のデータはありません。";
                 foreach (Book wBook in wDb.Books) {
                     Console.WriteLine(
-                        $"ID：{wBook.Id} タイトル：{wBook.Title}発行年：{wBook.PublishedYear} " +
+                        $"ID：{wBook.Id} タイトル：{wBook.Title}　発行年：{wBook.PublishedYear} " +
                         $"著者名：{ wBook.Author?.Name ?? wBook.Publisher } " +
                         $"著書のID：{wBook.Author?.Id.ToString() ?? wNoAuthorMessage} "
                         );
@@ -101,8 +100,8 @@ namespace chapter13 {
             using (var wDb = new BooksDbContext()) {
                 foreach (Author wAuthor in wDb.Authors) {
                     Console.WriteLine(
-                        $"ID：{wAuthor.Id} 著者名：{wAuthor.Name} " +
-                        $"発行年：{wAuthor.Birthday.ToString("D")} " +
+                        $"ID：{wAuthor.Id}　著者名：{wAuthor.Name}　" +
+                        $"発行年：{wAuthor.Birthday.ToString("D")}　" +
                         $"性別：{wAuthor.Gender}"
                         );
                 }
@@ -117,7 +116,7 @@ namespace chapter13 {
                 if (vBook.Author != null) {
 
                     // DBに登録済みの著書とヒットした場合
-                    if (wDb.Authors.All(x => x.Name == vBook.Author.Name)) {
+                    if (wDb.Authors.Any(x => x.Name == vBook.Author.Name)) {
                         Author wAuthor = wDb.Authors.Single(x => x.Name == vBook.Author.Name);
                         vBook.Author = wAuthor;
                         wDb.Books.Add(vBook);
@@ -131,7 +130,7 @@ namespace chapter13 {
                 } else {
 
                     // DBに登録済みの著書とヒットした場合
-                    if (wDb.Authors.All(x => x.Name == vBook.Publisher)) {
+                    if (wDb.Authors.Any(x => x.Name == vBook.Publisher)) {
                         Author wAuthor = wDb.Authors.Single(x => x.Name == vBook.Publisher);
                         vBook.Author = wAuthor;
                         wDb.Books.Add(vBook);
@@ -157,7 +156,7 @@ namespace chapter13 {
         }
 
         // Bookテーブルの初期化
-        private static void InitializBooks() {
+        private static void InitializeBooks() {
             using (var wDb = new BooksDbContext()) {
                 foreach (Book wBook in wDb.Books) {
                     DeleteBook(wBook.Id);

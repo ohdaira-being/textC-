@@ -11,7 +11,7 @@ namespace chapter13.Models {
         /// <summary>
         /// 著者のIDプロパティ
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// 著者名プロパティ

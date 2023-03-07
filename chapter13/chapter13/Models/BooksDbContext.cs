@@ -9,11 +9,8 @@ namespace chapter13.Models {
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public BooksDbContext()
-            : base("name=BooksDbContext") {
-            Database.SetInitializer(
-                new MigrateDatabaseToLatestVersion<BooksDbContext, Configuration>()
-                );
+        public BooksDbContext() : base("name=BooksDbContext") {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<BooksDbContext, Configuration>());
         }
 
         /// <summary>
