@@ -19,7 +19,6 @@ namespace Question15_1 {
         /// コンストラクタ
         /// </summary>
         static Library() {
-
             // 1. の回答
             Categories = new Category[]{
                 new Category(1, "Development"),
@@ -28,7 +27,6 @@ namespace Question15_1 {
                 new Category(4, "Windows"),
                 new Category(5, "Application"),
             };
-
             Books = new Book[]{
                 new Book("Writing C# Solid Code", 1, 2500, 2016),
                 new Book("C#開発指南", 1, 3800, 2014),
@@ -42,8 +40,8 @@ namespace Question15_1 {
                 new Book("Web デザイン講座 HTML5 & CSS", 3, 2800, 2013),
                 new Book("HTML5 Web 大百科", 3, 3800, 2015),
                 new Book("CSS デザイン 逆引き辞典", 3, 3550, 2015),
-                new Book("PowerShell 実線レシピ", 4, 2280, 2016),
-                new Book("Windows10 で楽しくお仕事", 4, 1890, 2015),
+                new Book("Windows10 で楽しくお仕事", 4, 2280, 2016),
+                new Book("Windows10 使いこなし術", 4, 1890, 2015),
                 new Book("続Windows10 使いこなし術", 4, 2080, 2016),
                 new Book("Windows10 やさしい操作入門", 4, 2300, 2015),
                 new Book("まるわかりMicro Office入門", 5, 1890, 2015),

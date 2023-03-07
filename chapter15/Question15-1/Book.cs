@@ -14,18 +14,18 @@
         /// <summary>
         /// IDプロパティ
         /// </summary>
-        public int CategoryId { get; set; }
+        public int CategoryId { get; }
         /// <summary>
         /// 発行年プロパティ
         /// </summary>
-        public int PublisherYear { get; set; }
+        public int PublishedYear { get; set; }
 
         /// <summary>
         /// ToStringをオーバーライド
         /// </summary>
         /// <returns>書籍クラスの文字列</returns>
         public override string ToString() {
-            return $"発行年：{PublisherYear}、カテゴリ名：{CategoryId}、価格：{Price}、タイトル：{Title}";
+            return $"発行年：{this.PublishedYear}、カテゴリ名：{this.CategoryId}、価格：{this.Price}、タイトル：{this.Title}";
         }
 
         /// <summary>
@@ -39,7 +39,7 @@
             this.Title = vTitle;
             this.Price = vPrice;
             this.CategoryId = vCategoryId;
-            this.PublisherYear = vPublisherYear;
+            this.PublishedYear = vPublisherYear;
         }
     }
 }

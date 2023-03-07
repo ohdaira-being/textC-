@@ -6,7 +6,7 @@
         /// <summary>
         /// IDプロパティ
         /// </summary>
-        public int Id { get; set; }
+        public int Id { get; }
         /// <summary>
         /// カテゴリ名プロパティ
         /// </summary>
@@ -17,7 +17,7 @@
         /// </summary>
         /// <returns>カテゴリクラスの要素の文字列</returns>
         public override string ToString() {
-            return $"Id：{Id}、カテゴリ名：{Name}";
+            return $"Id：{this.Id}、カテゴリ名：{this.Name}";
         }
 
         /// <summary>
