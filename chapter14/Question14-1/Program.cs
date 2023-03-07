@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Question14_1 {
@@ -12,16 +13,17 @@ namespace Question14_1 {
 
     class Program {
         static void Main(string[] args) {
-            var wFilePath = @"../../../Sample14-1.txt";
+            var wFilePath = @"..\..\..\Sample14-1.txt";
             foreach (string wLine in File.ReadAllLines(wFilePath, Encoding.UTF8)) {
                 Console.WriteLine(wLine);
-                RunAndWait(wLine);
+                string[] wTextArray = wLine.Split(' ');
+                RunAndWait(wTextArray.FirstOrDefault(x => Path.HasExtension(x)), wTextArray[1]);
             }
             Console.WriteLine("テキストファイルのパスの実行を完了しました。");
             Console.ReadLine();
         }
-        private static void RunAndWait(string vPath) {
-            using (var wProcess = Process.Start(Environment.ExpandEnvironmentVariables(vPath))) {
+        private static void RunAndWait(string vPath, string vText) {
+            using (var wProcess = Process.Start(vPath, vText)) {
                 wProcess.WaitForExit();
             }
         }

@@ -13,7 +13,7 @@ namespace Question14_4 {
             wWebClient.Encoding = Encoding.UTF8;
             string wHtmlText = wWebClient.DownloadString("https://qiita.com/yutorisan/items/d28386f168f2f3ab166d");
 
-            var wSaveFilePath = @"../../../Sample14-4.txt";
+            var wSaveFilePath = @"../../../Sample14-4.html";
             using (var wWriter = new StreamWriter(wSaveFilePath)) {
                 wWriter.WriteLine(wHtmlText);
             }

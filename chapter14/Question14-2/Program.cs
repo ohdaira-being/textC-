@@ -10,20 +10,14 @@ namespace Question14_2 {
     class Program {
         static void Main(string[] args) {
             // アセンブリバージョンの表示
-            var wAssembly = Assembly.GetExecutingAssembly();
-            var wAssemblyVersion = wAssembly.GetName().Version;
-            Console.WriteLine(
-                $"{wAssemblyVersion.Major}.{wAssemblyVersion.Minor}." +
-                $"{wAssemblyVersion.Build}.{wAssemblyVersion.Revision}"
-                );
+            Assembly wAssembly = Assembly.GetExecutingAssembly();
+            Version wAssemblyVersion = wAssembly.GetName().Version;
+            Console.WriteLine(wAssemblyVersion);
 
             // ファイルバージョンの表示
             string wLocation = wAssembly.Location;
             var wFileVersion = FileVersionInfo.GetVersionInfo(wLocation);
-            Console.WriteLine(
-                $"{wFileVersion.FileMajorPart}.{wFileVersion.FileMinorPart}." +
-                $"{wFileVersion.FileBuildPart}.{wFileVersion.FilePrivatePart}"
-                );
+            Console.WriteLine(wFileVersion.FileVersion);
 
             Console.ReadLine();
         }

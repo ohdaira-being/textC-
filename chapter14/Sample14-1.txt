@@ -1,4 +1,4 @@
-%SystemRoot%\system32\notepad.exe
-%SystemRoot%\system32\write.exe
-%SystemRoot%\system32\notepad.exe
-%SystemRoot%\system32\write.exe
+..\..\..\ConsoleApp1.exe ･ω･*)ﾉнёιιο!
+..\..\..\ConsoleApp2.exe ・。・ﾀｺｫ・・・。
+..\..\..\ConsoleApp3.exe (?・・?)
+..\..\..\ConsoleApp4.exe ｫオ～!!(ﾟДﾟノ)ノ
