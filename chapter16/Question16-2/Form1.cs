@@ -18,69 +18,68 @@ namespace Question16_2 {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            textBox3.Text = ChoiceDirectory();
+        private void BtnSelectFile_Click(object sender, EventArgs e) {
+            TxtFile.Text = SelectDirectory();
         }
 
         /// <summary>
         /// ディレクトリを選択するメソッド
         /// </summary>
         /// <returns>選択したディレクトリのフルパス</returns>
-        private static string ChoiceDirectory() {
-            FolderBrowserDialog wFbDialog = new FolderBrowserDialog();
-            wFbDialog.Description = "検索するディレクトリの選択";
-            wFbDialog.SelectedPath = @"C:";
-            if (wFbDialog.ShowDialog() == DialogResult.OK) {
-                return wFbDialog.SelectedPath;
-            } else {
-                return "キャンセルされました";
+        private static string SelectDirectory() {
+            using (FolderBrowserDialog wFbDialog = new FolderBrowserDialog()) {
+                wFbDialog.Description = "検索対象（ファルダ）の選択";
+                wFbDialog.SelectedPath = @"C:";
+                return wFbDialog.ShowDialog() == DialogResult.OK ? wFbDialog.SelectedPath : null;
             }
         }
 
-        private async void button2_Click(object sender, EventArgs e) {
-            if (textBox3.Text == "") return;
-            label8.Text = "検索中";
-            // 並列処理検索と非並列処理検索を、並列処理で行う
-            var wParallelRun = Task.Run(() => ParallelReadLine());
-            var wNormalRun = Task.Run(() => NormalReadLine());
-            var wParallelText = await wParallelRun;
-            var wNormalText = await wNormalRun;
-            textBox4.Text = wParallelText.Item1.ToString();
-            label7.Text = wParallelText.Item2;
-            textBox5.Text = wNormalText.Item1.ToString();
-            label13.Text = wNormalText.Item2;
-            label8.Text = "完了";
+        private async void BtnSearchFile_Click(object sender, EventArgs e) {
+            TxtState.Text = "検索中";
+            this.Cursor = Cursors.AppStarting;
+            // 並列処理検索と非並列処理検索を、並列処理で行う 
+            Task<(string, string)> wParallelRun = Task.Run(() => ParallelReadLine());
+            Task<(string, string)> wNormalRun = Task.Run(() => NormalReadLine());
+            (string, string) wParallelText = await wParallelRun;
+            (string, string) wNormalText = await wNormalRun;
+            TxtResult.Text = wParallelText.Item1;
+            TxtParallelTime.Text = wParallelText.Item2;
+            TxtUnParallelTime.Text = wNormalText.Item2;
+            this.Cursor = Cursors.Default;
+            TxtState.Text = "完了";
         }
 
         /// <summary>
         /// 並列処理で検索するメソッド
         /// </summary>
         /// <returns>マッチしたパスと処理時間</returns>
-        private (StringBuilder, string) ParallelReadLine() {
+        private (string, string) ParallelReadLine() {
+            if (!Directory.Exists(TxtFile.Text)) return ("ファイル未選択　or　パスが間違っています。", "未処理");
             var wTimer = Stopwatch.StartNew();
-            StringBuilder wPath = new StringBuilder();
-            IEnumerable<string> wFiles = Directory.EnumerateFiles(textBox3.Text, "*", SearchOption.AllDirectories);
+            var wPath = new StringBuilder();
+            IEnumerable<string> wFiles = Directory.EnumerateFiles(TxtFile.Text, "*.cs", SearchOption.AllDirectories);
             foreach (string wFile in wFiles.AsParallel()
-                                        .Where(x => IsMatchText(x, textBox1.Text) && IsMatchText(x, textBox2.Text))) {
-                wPath.Append($"{wFile}\n");
+                                        .Where(x => IsMatchText(x, TxtWord1.Text) && IsMatchText(x, TxtWord2.Text))) {
+                wPath.AppendLine($"・{wFile}");
             };
             wTimer.Stop();
-            return (wPath, wTimer.ElapsedMilliseconds.ToString());
+            return (wPath.ToString(), wTimer.ElapsedMilliseconds.ToString());
         }
 
         /// <summary>
         /// 非並列処理で検索するメソッド
         /// </summary>
         /// <returns>マッチしたパスと処理時間</returns>
-        private (StringBuilder, string) NormalReadLine() {
+        private (string, string) NormalReadLine() {
+            if (!Directory.Exists(TxtFile.Text)) return ("ファイル未選択　or　パスが間違っています。", "未処理");
             var wTimer = Stopwatch.StartNew();
-            StringBuilder wPath = new StringBuilder();
-            IEnumerable<string> wFiles = Directory.EnumerateFiles(textBox3.Text, "*", SearchOption.AllDirectories);
-            foreach (string wFile in wFiles.Where(x => IsMatchText(x, textBox1.Text) && IsMatchText(x, textBox2.Text))) {
-                wPath.Append($"{wFile}\n");
+            var wPath = new StringBuilder();
+            IEnumerable<string> wFiles = Directory.EnumerateFiles(TxtFile.Text, "*.cs", SearchOption.AllDirectories);
+            foreach (string wFile in wFiles.Where(x => IsMatchText(x, TxtWord1.Text) && IsMatchText(x, TxtWord2.Text))) {
+                wPath.AppendLine($"・{wFile}\n");
             };
             wTimer.Stop();
-            return (wPath, wTimer.ElapsedMilliseconds.ToString());
+            return (wPath.ToString(), wTimer.ElapsedMilliseconds.ToString());
         }
 
         /// <summary>
@@ -90,29 +89,5 @@ namespace Question16_2 {
         /// <param name="vText">検索ワード</param>
         /// <returns>マッチしたかどうかの真偽</returns>
         private bool IsMatchText(string vPath, string vText) => Regex.IsMatch(File.ReadAllText(vPath, Encoding.UTF8), $@"\b{vText}\b");
-
-        private void textBox4_TextChanged(object sender, EventArgs e) {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e) {
-
-        }
-
-        private void textBox4_TextChanged_1(object sender, EventArgs e) {
-            this.textBox4.ScrollBars = ScrollBars.Vertical;
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e) {
-            this.textBox5.ScrollBars = ScrollBars.Vertical;
-        }
-
-        private void label9_Click(object sender, EventArgs e) {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e) {
-
-        }
     }
 }

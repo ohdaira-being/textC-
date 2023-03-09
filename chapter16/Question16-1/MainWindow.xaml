@@ -7,9 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="button1" Content="ファイル選択" HorizontalAlignment="Left" Height="42" Margin="93,348,0,0" VerticalAlignment="Top" Width="200" Click="button1_Click"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="297" Margin="93,46,0,0" TextWrapping="Wrap" Text="表示" VerticalAlignment="Top" Width="629"/>
-        <Label x:Name="label1" Content="テキストファイルの読み込み" HorizontalAlignment="Left" Height="31" Margin="93,10,0,0" VerticalAlignment="Top" Width="629"/>
+        <Button x:Name="BtnSelectFile" Content="参照" HorizontalAlignment="Left" Height="30" Margin="570,15,0,0" VerticalAlignment="Top" Width="143" Click="BtnSelectFile_Click"/>
+        <TextBox x:Name="TxtShowText" HorizontalAlignment="Left" Height="297" Margin="79,114,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="629" />
+        <Label x:Name="LblProcessState" Content="ファイル未選択" HorizontalAlignment="Left" Height="26" Margin="266,88,0,0" VerticalAlignment="Top" Width="442"/>
+        <Label Content="表示ファイル：" HorizontalAlignment="Left" Height="26" Margin="176,88,0,0" VerticalAlignment="Top" Width="85"/>
+        <TextBox x:Name="TxtFilePath" HorizontalAlignment="Left" Height="30" Margin="176,15,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="389"/>
+        <Label Content="検索対象：" HorizontalAlignment="Left" Height="30" Margin="79,15,0,0" VerticalAlignment="Top" Width="97"/>
+        <Button x:Name="BtnStartReadFile" Content="読み込み" HorizontalAlignment="Left" Height="30" Margin="570,58,0,0" VerticalAlignment="Top" Width="143" Click="BtnStartReadFile_Click"/>
+        <Label Content="【読み込み結果】" HorizontalAlignment="Left" Height="26" Margin="79,88,0,0" VerticalAlignment="Top" Width="97"/>
 
     </Grid>
 </Window>

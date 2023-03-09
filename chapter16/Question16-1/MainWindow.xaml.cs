@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
@@ -21,36 +22,42 @@ namespace Question16_1 {
             InitializeComponent();
         }
 
-        private async void button1_Click(object sender, RoutedEventArgs e) {
-            var wLines = await ReadLines();
-            if (wLines != null) {
-                textBox1.Text = string.Join("\n", wLines);
-                label1.Content = "読み込んだテキストファイルの内容を表示しています。";
-            } else {
-                textBox1.Text = "";
-                label1.Content = "ファイル選択をキャンセルしました。";
-            }
+        private async void BtnSelectFile_Click(object sender, RoutedEventArgs e) {
+            TxtFilePath.Text = await SelectFilePath();
+        }
+
+        private async void BtnStartReadFile_Click(object sender, RoutedEventArgs e) {
+            IEnumerable<string> wLines = await ReadLines(TxtFilePath.Text);
+            LblProcessState.Content = wLines == null ? "ファイル未選択　or　パスが間違っています。" : TxtFilePath.Text;
+            TxtShowText.Text = wLines == null ? String.Empty : String.Join("\n", await ReadLines(TxtFilePath.Text));
+        }
+
+        private async Task<string> SelectFilePath() {
+            var wOpenPicker = new FileOpenPicker {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
+                FileTypeFilter = { ".txt" },
+            };
+            // ウィンドウハンドルの指定
+            ((IInitializeWithWindow)(object)wOpenPicker).Initialize(new WindowInteropHelper(this).Handle);
+            StorageFile wFile = await wOpenPicker.PickSingleFileAsync();
+            return wFile?.Path.ToString();
         }
 
         /// <summary>
         /// ファイルピッカーで選択したファイルを読み込むメソッド
         /// </summary>
         /// <returns>ファイルの内容</returns>
-        private async Task<IEnumerable<string>> ReadLines() {
-            var wOpenPicker = new FileOpenPicker {
-                ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
-            };
-            // ウィンドウハンドルの指定
-            ((IInitializeWithWindow)(object)wOpenPicker).Initialize(new WindowInteropHelper(this).Handle);
-            wOpenPicker.FileTypeFilter.Add(".txt");
-            StorageFile wFile = await wOpenPicker.PickSingleFileAsync();
-
-            if (wFile == null) return null;
-
-            IList<string> wLines = await FileIO.ReadLinesAsync(wFile);
-
-            return wLines;
+        private async Task<IEnumerable<string>> ReadLines(string vFile) {
+            if (!File.Exists(vFile)) return null;
+            var wTexts = new List<string>();
+            using (var wReader = new StreamReader(vFile)) {
+                while (!wReader.EndOfStream) {
+                    string wText = await wReader.ReadLineAsync();
+                    wTexts.Add(wText);
+                }
+            }
+            return wTexts;
         }
     }
 }
