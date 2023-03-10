@@ -17,7 +17,7 @@ namespace Question14_5 {
         // コマンドライン引数argsにパスを設定してます。
         static void Main(string[] args) {
             using (ZipArchive wZipFile = ZipFile.OpenRead(args[0])) {
-                foreach (var wTxtFile in wZipFile.Entries.Where(x => Path.GetExtension(x.Name) == ".txt")) {
+                foreach (ZipArchiveEntry wTxtFile in wZipFile.Entries.Where(x => Path.GetExtension(x.Name) == ".txt")) {
                     string wFilePath = Path.Combine(args[1], wTxtFile.FullName);
                     Directory.CreateDirectory(Path.GetDirectoryName(wFilePath));
                     wTxtFile.ExtractToFile(wFilePath, overwrite: true);

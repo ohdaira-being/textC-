@@ -5,7 +5,6 @@ namespace Question14_3 {
     /// configファイルを取得するクラス
     /// </summary>
     public class MyAppSettings : ConfigurationSection {
-
         /// <summary>
         /// TraceOptionプロパティ
         /// </summary>
@@ -14,7 +13,6 @@ namespace Question14_3 {
             get { return (TraceOption)this["traceOption"]; }
             set { this["traceOption"] = value; }
         }
-
         /// <summary>
         /// CalendarOptionプロパティ
         /// </summary>

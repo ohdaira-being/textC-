@@ -7,9 +7,7 @@ namespace Question14_6 {
 
     class Program {
         static void Main(string[] args) {
-            Console.WriteLine(
-                $"シンガポールの現地時刻：{TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, TimeZoneInfo.Local.Id, "Singapore Standard Time"):yyyy/MM/dd HH:mm:ss}"
-                );
+            Console.WriteLine( $"シンガポールの現地時刻：{TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, TimeZoneInfo.Local.Id, "Singapore Standard Time"):yyyy/MM/dd HH:mm:ss}");
             Console.ReadLine();
         }
     }

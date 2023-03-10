@@ -11,14 +11,9 @@ namespace Question14_2 {
         static void Main(string[] args) {
             // アセンブリバージョンの表示
             Assembly wAssembly = Assembly.GetExecutingAssembly();
-            Version wAssemblyVersion = wAssembly.GetName().Version;
-            Console.WriteLine(wAssemblyVersion);
-
+            Console.WriteLine(wAssembly.GetName().Version);
             // ファイルバージョンの表示
-            string wLocation = wAssembly.Location;
-            var wFileVersion = FileVersionInfo.GetVersionInfo(wLocation);
-            Console.WriteLine(wFileVersion.FileVersion);
-
+            Console.WriteLine(FileVersionInfo.GetVersionInfo(wAssembly.Location).FileVersion);
             Console.ReadLine();
         }
     }

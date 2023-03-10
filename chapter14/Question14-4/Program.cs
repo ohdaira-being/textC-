@@ -9,15 +9,14 @@ namespace Question14_4 {
 
     class Program {
         static void Main(string[] args) {
-            var wWebClient = new WebClient();
-            wWebClient.Encoding = Encoding.UTF8;
+            var wWebClient = new WebClient() {
+                Encoding = Encoding.UTF8,
+            };
             string wHtmlText = wWebClient.DownloadString("https://qiita.com/yutorisan/items/d28386f168f2f3ab166d");
-
-            var wSaveFilePath = @"../../../Sample14-4.html";
+            string wSaveFilePath = @"../../../Sample14-4.html";
             using (var wWriter = new StreamWriter(wSaveFilePath)) {
                 wWriter.WriteLine(wHtmlText);
             }
-
             Console.ReadLine();
         }
     }

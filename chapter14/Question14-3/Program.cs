@@ -18,7 +18,6 @@ namespace Question14_3 {
             Console.WriteLine(wTraceOption.BufferSize);
             Console.WriteLine(wTraceOption.Enabled);
             Console.WriteLine(wTraceOption.FilePath);
-
             CalendarOption wCalendarOption = wMyAppSettings.CalendarOption;
             Console.WriteLine(wCalendarOption.StringFormat);
             Console.WriteLine(wCalendarOption.Minimum);

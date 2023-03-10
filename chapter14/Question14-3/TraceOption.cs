@@ -5,7 +5,6 @@ namespace Question14_3 {
     /// 追跡オプションクラス
     /// </summary>
     public class TraceOption : ConfigurationElement {
-
         /// <summary>
         /// 追跡可否プロパティ
         /// </summary>
@@ -13,7 +12,6 @@ namespace Question14_3 {
         public bool Enabled {
             get { return (bool)this["enabled"]; }
         }
-
         /// <summary>
         /// ファイルパスプロパティ
         /// </summary>
@@ -21,7 +19,6 @@ namespace Question14_3 {
         public string FilePath {
             get { return (string)this["filePath"]; }
         }
-
         /// <summary>
         /// バッファサイズプロパティ
         /// </summary>

@@ -13,7 +13,7 @@ namespace Question14_1 {
 
     class Program {
         static void Main(string[] args) {
-            var wFilePath = @"..\..\..\Sample14-1.txt";
+            string wFilePath = @"..\..\..\Sample14-1.txt";
             foreach (string wLine in File.ReadAllLines(wFilePath, Encoding.UTF8)) {
                 Console.WriteLine(wLine);
                 string[] wTextArray = wLine.Split(' ');
