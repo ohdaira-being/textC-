@@ -9,12 +9,10 @@ namespace Question15_1 {
         /// カテゴリプロパティ
         /// </summary>
         public static IEnumerable<Category> Categories { get; private set; }
-
         /// <summary>
         /// 書籍プロパティ
         /// </summary>
         public static IEnumerable<Book> Books { get; private set; }
-
         /// <summary>
         /// コンストラクタ
         /// </summary>

@@ -27,28 +27,25 @@ namespace Question15_1 {
     class Program {
         static void Main(string[] args) {
             // 1. の回答はLibraryクラスに記載しています。
-
             // 2. の回答
             Console.WriteLine("\n～問題２の回答～");
             int wMaxPrice = Library.Books.Max(x => x.Price);
             foreach (Book wBook in Library.Books.Where(x => x.Price == wMaxPrice)) {
                 Console.WriteLine(wBook);
             }
-
             // 3. の回答
             Console.WriteLine("\n～問題３の回答～");
             foreach (IGrouping<int, Book> wGroupingBook in Library.Books.OrderBy(x => x.PublishedYear).GroupBy(x => x.PublishedYear)) {
                 Console.WriteLine($"{wGroupingBook.Key}年：{wGroupingBook.Count()}冊");
             }
-
             // 4. の回答
             Console.WriteLine("\n～問題４の回答～");
             foreach (Book wBook in Library.Books.OrderByDescending(x => x.PublishedYear).ThenByDescending(x => x.Price)) {
                 Console.WriteLine(wBook);
             }
-
             // 5. の回答
             Console.WriteLine("\n～問題５の回答～");
+            // 匿名型
             var wBooks = Library.Books.Join(
                 Library.Categories,
                 x => x.CategoryId,
@@ -58,30 +55,28 @@ namespace Question15_1 {
                     Category = y.Name,
                     PublisherYear = x.PublishedYear
                 });
-            foreach (var wBook in wBooks.Where(x => x.PublisherYear == 2016).GroupBy(x => x.Category)) {
-                Console.WriteLine(wBook.Key);
+            foreach (string wCategory in wBooks.Where(x => x.PublisherYear == 2016).GroupBy(x => x.Category).Select(x => x.Key)) {
+                Console.WriteLine(wCategory);
             }
-
             // 6. の回答
             Console.WriteLine("\n～問題６の回答～");
-            foreach (var wGroupingBook in wBooks.OrderBy(x => x.Category).GroupBy(x => x.Category)) {
-                Console.WriteLine($"#【{wGroupingBook.Key}】");
-                foreach (var wBook in wBooks.Where(x => x.Category == wGroupingBook.Key)) {
-                    Console.WriteLine($"　・{wBook.Title}");
+            foreach (string wCategory in wBooks.OrderBy(x => x.Category).GroupBy(x => x.Category).Select(x => x.Key)) {
+                Console.WriteLine($"#【{wCategory}】");
+                foreach (string wTitle in wBooks.Where(x => x.Category == wCategory).Select(x => x.Title)) {
+                    Console.WriteLine($"　・{wTitle}");
                 }
             }
-
             // 7. の回答
             Console.WriteLine("\n～問題７の回答～");
-            foreach (var wGroupingBook in wBooks.Where(x => x.Category == "Development").OrderBy(x => x.PublisherYear).GroupBy(x => x.PublisherYear)) {
-                Console.WriteLine($"#{wGroupingBook.Key}");
-                foreach (var wBook in wGroupingBook.Where(x => x.PublisherYear == wGroupingBook.Key)) {
-                    Console.WriteLine($"　・{wBook.Title}");
+            foreach (int wPublisherYear in wBooks.Where(x => x.Category == "Development").OrderBy(x => x.PublisherYear).GroupBy(x => x.PublisherYear).Select(x => x.Key)) {
+                Console.WriteLine($"#{wPublisherYear}");
+                foreach (string wTitle in wBooks.Where(x => x.PublisherYear == wPublisherYear).Select(x => x.Title)) {
+                    Console.WriteLine($"　・{wTitle}");
                 }
             }
-
             // 8. の回答
             Console.WriteLine("\n～問題８の回答～");
+            // 匿名型
             var wBookGroups = Library.Categories.GroupJoin(
                 Library.Books,
                 x => x.Id,

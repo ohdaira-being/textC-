@@ -11,15 +11,11 @@
         /// カテゴリ名プロパティ
         /// </summary>
         public string Name { get; set; }
-
         /// <summary>
         /// ToStringメソッドをオーバーライド
         /// </summary>
         /// <returns>カテゴリクラスの要素の文字列</returns>
-        public override string ToString() {
-            return $"Id：{this.Id}、カテゴリ名：{this.Name}";
-        }
-
+        public override string ToString() => $"Id：{this.Id}、カテゴリ名：{this.Name}";
         /// <summary>
         /// コンストラクタ
         /// </summary>

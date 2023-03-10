@@ -19,15 +19,11 @@
         /// 発行年プロパティ
         /// </summary>
         public int PublishedYear { get; set; }
-
         /// <summary>
         /// ToStringをオーバーライド
         /// </summary>
         /// <returns>書籍クラスの文字列</returns>
-        public override string ToString() {
-            return $"発行年：{this.PublishedYear}、カテゴリ名：{this.CategoryId}、価格：{this.Price}、タイトル：{this.Title}";
-        }
-
+        public override string ToString() => $"発行年：{this.PublishedYear}、カテゴリ名：{this.CategoryId}、価格：{this.Price}、タイトル：{this.Title}";
         /// <summary>
         /// コンストラクタ
         /// </summary>
