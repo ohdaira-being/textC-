@@ -48,6 +48,7 @@ namespace Question16_1 {
         }
         /// <summary>
         /// パスからファイル内容を読み込むメソッド
+        /// ファイルが見つからないとnullを返す
         /// </summary>
         /// <returns>ファイルの内容</returns>
         private async Task<string> ReadLines(string vFile) {
