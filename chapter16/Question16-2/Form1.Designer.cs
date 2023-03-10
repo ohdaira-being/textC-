@@ -119,10 +119,10 @@ namespace Question16_2 {
             this.LblWord2.TabIndex = 7;
             this.LblWord2.Text = "検索ワード2：";
             // 
-            // TxtFile
+            // TxtDirectoryPath
             // 
             this.TxtDirectoryPath.Location = new System.Drawing.Point(124, 12);
-            this.TxtDirectoryPath.Name = "TxtFile";
+            this.TxtDirectoryPath.Name = "TxtDirectoryPath";
             this.TxtDirectoryPath.Size = new System.Drawing.Size(453, 22);
             this.TxtDirectoryPath.TabIndex = 8;
             // 
