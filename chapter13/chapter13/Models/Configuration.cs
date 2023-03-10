@@ -5,7 +5,6 @@ namespace chapter13.Models {
     /// 自動マイグレーション用クラス
     /// </summary>
     internal sealed class Configuration : DbMigrationsConfiguration<BooksDbContext> {
-
         /// <summary>
         /// コンストラクタ
         /// </summary>

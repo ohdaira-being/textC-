@@ -5,7 +5,6 @@ namespace chapter13.Models {
     /// DBアクセスクラス
     /// </summary>
     public class BooksDbContext : DbContext {
-
         /// <summary>
         /// コンストラクタ
         /// </summary>

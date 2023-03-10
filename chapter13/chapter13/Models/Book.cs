@@ -5,7 +5,6 @@ namespace chapter13.Models {
     /// 書籍クラス
     /// </summary>
     public class Book {
-
         /// <summary>
         /// 書籍のIdプロパティ
         /// </summary>
