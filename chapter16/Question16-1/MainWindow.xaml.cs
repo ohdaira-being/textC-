@@ -21,17 +21,20 @@ namespace Question16_1 {
         public MainWindow() {
             InitializeComponent();
         }
-
         private async void BtnSelectFile_Click(object sender, RoutedEventArgs e) {
-            TxtFilePath.Text = await SelectFilePath();
+            string wFilePath = await SelectFilePath();
+            if (wFilePath == null) return;
+            TxtFilePath.Text = wFilePath;
         }
-
         private async void BtnStartReadFile_Click(object sender, RoutedEventArgs e) {
-            IEnumerable<string> wLines = await ReadLines(TxtFilePath.Text);
-            LblProcessState.Content = wLines == null ? "ファイル未選択　or　パスが間違っています。" : TxtFilePath.Text;
-            TxtShowText.Text = wLines == null ? String.Empty : String.Join("\n", await ReadLines(TxtFilePath.Text));
+            string wLines = await ReadLines(TxtFilePath.Text);
+            LblProcessState.Content = wLines != null ? TxtFilePath.Text : "ファイル未選択　or　パスが間違っています。";
+            TxtShowText.Text = wLines != null ? wLines : String.Empty;
         }
-
+        /// <summary>
+        /// ファイルピッカーを出力し、テキストファイルを選択するメソッド
+        /// </summary>
+        /// <returns>選択したテキストファイルのパス</returns>
         private async Task<string> SelectFilePath() {
             var wOpenPicker = new FileOpenPicker {
                 ViewMode = PickerViewMode.Thumbnail,
@@ -40,15 +43,14 @@ namespace Question16_1 {
             };
             // ウィンドウハンドルの指定
             ((IInitializeWithWindow)(object)wOpenPicker).Initialize(new WindowInteropHelper(this).Handle);
-            StorageFile wFile = await wOpenPicker.PickSingleFileAsync();
-            return wFile?.Path.ToString();
+            StorageFile wSelectFile = await wOpenPicker.PickSingleFileAsync();
+            return wSelectFile?.Path.ToString();
         }
-
         /// <summary>
-        /// ファイルピッカーで選択したファイルを読み込むメソッド
+        /// パスからファイル内容を読み込むメソッド
         /// </summary>
         /// <returns>ファイルの内容</returns>
-        private async Task<IEnumerable<string>> ReadLines(string vFile) {
+        private async Task<string> ReadLines(string vFile) {
             if (!File.Exists(vFile)) return null;
             var wTexts = new List<string>();
             using (var wReader = new StreamReader(vFile)) {
@@ -57,7 +59,7 @@ namespace Question16_1 {
                     wTexts.Add(wText);
                 }
             }
-            return wTexts;
+            return String.Join("\n", wTexts);
         }
     }
 }

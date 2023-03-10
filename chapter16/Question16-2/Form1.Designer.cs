@@ -32,7 +32,7 @@ namespace Question16_2 {
             this.TxtWord2 = new System.Windows.Forms.TextBox();
             this.LblWord1 = new System.Windows.Forms.Label();
             this.LblWord2 = new System.Windows.Forms.Label();
-            this.TxtFile = new System.Windows.Forms.TextBox();
+            this.TxtDirectoryPath = new System.Windows.Forms.TextBox();
             this.LblParallelTime = new System.Windows.Forms.Label();
             this.LblState = new System.Windows.Forms.Label();
             this.LblParallel = new System.Windows.Forms.Label();
@@ -121,10 +121,10 @@ namespace Question16_2 {
             // 
             // TxtFile
             // 
-            this.TxtFile.Location = new System.Drawing.Point(124, 12);
-            this.TxtFile.Name = "TxtFile";
-            this.TxtFile.Size = new System.Drawing.Size(453, 22);
-            this.TxtFile.TabIndex = 8;
+            this.TxtDirectoryPath.Location = new System.Drawing.Point(124, 12);
+            this.TxtDirectoryPath.Name = "TxtFile";
+            this.TxtDirectoryPath.Size = new System.Drawing.Size(453, 22);
+            this.TxtDirectoryPath.TabIndex = 8;
             // 
             // LblParallelTime
             // 
@@ -229,7 +229,7 @@ namespace Question16_2 {
             this.Controls.Add(this.LblParallel);
             this.Controls.Add(this.LblState);
             this.Controls.Add(this.LblParallelTime);
-            this.Controls.Add(this.TxtFile);
+            this.Controls.Add(this.TxtDirectoryPath);
             this.Controls.Add(this.LblWord2);
             this.Controls.Add(this.LblWord1);
             this.Controls.Add(this.TxtWord2);
@@ -255,7 +255,7 @@ namespace Question16_2 {
         private System.Windows.Forms.TextBox TxtWord2;
         private System.Windows.Forms.Label LblWord1;
         private System.Windows.Forms.Label LblWord2;
-        private System.Windows.Forms.TextBox TxtFile;
+        private System.Windows.Forms.TextBox TxtDirectoryPath;
         private System.Windows.Forms.Label LblParallelTime;
         private System.Windows.Forms.Label LblState;
         private System.Windows.Forms.Label LblParallel;
