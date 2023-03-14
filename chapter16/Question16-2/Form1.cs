@@ -19,26 +19,21 @@ namespace Question16_2 {
         }
 
         private void BtnSelectFile_Click(object sender, EventArgs e) {
-            var wDirectoryPath = SelectDirectory();
-            if (wDirectoryPath == null) return;
-            TxtDirectoryPath.Text = wDirectoryPath;
-        }
-
-        /// <summary>
-        /// ディレクトリを選択するメソッド
-        /// 選択をキャンセルした場合、nullが返る
-        /// </summary>
-        /// <returns>選択したディレクトリのフルパス</returns>
-        private static string SelectDirectory() {
-            using (var wFbDialog = new FolderBrowserDialog() {
-                Description = "検索対象（ファルダ）の選択",
-                SelectedPath = @"C:"
-            }) {
-                return wFbDialog.ShowDialog() == DialogResult.OK ? wFbDialog.SelectedPath : null;
+            using (var wFbDialog = new FolderBrowserDialog()) {
+                wFbDialog.Description = "検索対象（フォルダ）の選択";
+                wFbDialog.SelectedPath = @"C:";
+                if (wFbDialog.ShowDialog() != DialogResult.OK) return;
+                TxtDirectoryPath.Text = wFbDialog.SelectedPath;
             }
         }
 
         private async void BtnSearchFile_Click(object sender, EventArgs e) {
+            if (!Directory.Exists(TxtDirectoryPath.Text)) {
+                TxtParallelTime.Text = "未検索";
+                TxtUnParallelTime.Text = "未検索";
+                TxtResult.Text = "ファイル未選択　or　パスが間違っています。";
+                return;
+            }
             TxtState.Text = "検索中";
             this.Cursor = Cursors.AppStarting;
             // 並列処理検索と非並列処理検索を、並列処理で行う 
@@ -46,7 +41,8 @@ namespace Question16_2 {
             Task<(string, string)> wNormalRun = Task.Run(() => NormalSearchPaths());
             (string, string) wParallelText = await wParallelRun;
             (string, string) wNormalText = await wNormalRun;
-            TxtResult.Text = wParallelText.Item1;
+            //TxtResult.Text = wParallelText.Item1;
+            TxtResult.Text = (wParallelText.Item1 != String.Empty) ? wParallelText.Item1 : "検索ワードを含むファイルは、ありませんでした";
             TxtParallelTime.Text = wParallelText.Item2;
             TxtUnParallelTime.Text = wNormalText.Item2;
             this.Cursor = Cursors.Default;
@@ -58,12 +54,10 @@ namespace Question16_2 {
         /// </summary>
         /// <returns>マッチしたパスと処理時間</returns>
         private (string, string) ParallelSearchPaths() {
-            if (!Directory.Exists(TxtDirectoryPath.Text)) return ("ファイル未選択　or　パスが間違っています。", "未処理");
             var wTimer = Stopwatch.StartNew();
             var wSearchedPaths = new StringBuilder();
             IEnumerable<string> wPaths = Directory.EnumerateFiles(TxtDirectoryPath.Text, "*.cs", SearchOption.AllDirectories);
-            foreach (string wPath in wPaths.AsParallel()
-                                        .Where(x => IsMatchText(x, TxtWord1.Text) && IsMatchText(x, TxtWord2.Text))) {
+            foreach (string wPath in wPaths.AsParallel().Where(x => IsMatchText(x, TxtWord1.Text) && IsMatchText(x, TxtWord2.Text))) {
                 wSearchedPaths.AppendLine($"・{wPath}");
             };
             wTimer.Stop();
@@ -75,7 +69,6 @@ namespace Question16_2 {
         /// </summary>
         /// <returns>マッチしたパスと処理時間</returns>
         private (string, string) NormalSearchPaths() {
-            if (!Directory.Exists(TxtDirectoryPath.Text)) return ("ファイル未選択　or　パスが間違っています。", "未処理");
             var wTimer = Stopwatch.StartNew();
             var wSearchedPaths = new StringBuilder();
             IEnumerable<string> wPaths = Directory.EnumerateFiles(TxtDirectoryPath.Text, "*.cs", SearchOption.AllDirectories);

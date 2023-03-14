@@ -21,16 +21,19 @@ namespace Question16_1 {
         public MainWindow() {
             InitializeComponent();
         }
+
         private async void BtnSelectFile_Click(object sender, RoutedEventArgs e) {
             string wFilePath = await SelectFilePath();
             if (wFilePath == null) return;
             TxtFilePath.Text = wFilePath;
         }
+
         private async void BtnStartReadFile_Click(object sender, RoutedEventArgs e) {
             string wLines = await ReadLines(TxtFilePath.Text);
             LblProcessState.Content = wLines != null ? TxtFilePath.Text : "ファイル未選択　or　パスが間違っています。";
             TxtShowText.Text = wLines != null ? wLines : String.Empty;
         }
+
         /// <summary>
         /// ファイルピッカーを出力し、テキストファイルを選択するメソッド
         /// </summary>
@@ -46,6 +49,7 @@ namespace Question16_1 {
             StorageFile wSelectFile = await wOpenPicker.PickSingleFileAsync();
             return wSelectFile?.Path.ToString();
         }
+
         /// <summary>
         /// パスからファイル内容を読み込むメソッド
         /// ファイルが見つからないとnullを返す
