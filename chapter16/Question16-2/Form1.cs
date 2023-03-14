@@ -31,7 +31,7 @@ namespace Question16_2 {
             if (!Directory.Exists(TxtDirectoryPath.Text)) {
                 TxtParallelTime.Text = "未検索";
                 TxtUnParallelTime.Text = "未検索";
-                TxtResult.Text = "ファイル未選択　or　パスが間違っています。";
+                TxtResult.Text = "フォルダー未選択　or　パスが間違っています。";
                 return;
             }
             TxtState.Text = "検索中";
