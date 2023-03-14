@@ -32,18 +32,17 @@ namespace chapter13 {
             var wYasunariKawabata = new Author("川端康成", new DateTime(1899, 6, 14), "男性");
             List<Author> wAuthors = new List<Author> { wKanKikuchi, wYasunariKawabata };
             List<Book> wBooks = new List<Book>{
-                new Book("こころ", 1991, "夏目漱石", null),
-                new Book("伊豆の踊子", 2003, null, wYasunariKawabata),
-                new Book("真珠夫人", 2002, null, wKanKikuchi),
-                new Book("注文の多い料理店", 2000, null, wKenjiMiyazawa),
-                new Book("ワンピース", 2000, null, wSosekiNatsume),
-                new Book("坊ちゃん", 2003, null, wSosekiNatsume),
-                new Book("人間失格", 1990, null, wOsamuDazai),
-                new Book("111", 1212, "2222", null),
-                new Book("みだれ髪", 2000, null, wAkikoYosano),
-                new Book("銀河鉄道の夜", 1989, null, wKenjiMiyazawa),
-                new Book("ワン", 2000, null, wSosekiNatsume),
-                new Book("ワン222", 2000, "夏目漱石", null),
+                new Book("こころ", 1991, wSosekiNatsume),
+                new Book("伊豆の踊子", 2003, wYasunariKawabata),
+                new Book("真珠夫人", 2002, wKanKikuchi),
+                new Book("注文の多い料理店", 2000, wKenjiMiyazawa),
+                new Book("ワンピース", 2000, wSosekiNatsume),
+                new Book("坊ちゃん", 2003, wSosekiNatsume),
+                new Book("人間失格", 1990, wOsamuDazai),
+                new Book("みだれ髪", 2000, wAkikoYosano),
+                new Book("銀河鉄道の夜", 1989, wKenjiMiyazawa),
+                new Book("ワン", 2000, wSosekiNatsume),
+                new Book("ワン222", 2000, wSosekiNatsume),
             };
             AddAuthorList(wAuthors);
             AddBookList(wBooks);
@@ -62,7 +61,7 @@ namespace chapter13 {
                 // 4. の回答
                 Console.WriteLine("\n～問題４の回答～");
                 foreach (Book wBook in wDbBooks.OrderBy(x => x.PublishedYear).Take(3)) {
-                    Console.WriteLine($"タイトル：{wBook.Title}　著者名：{ wBook.Author?.Name ?? wBook.AuthorName }");
+                    Console.WriteLine($"タイトル：{wBook.Title}　著者名：{ wBook.Author.Name }");
                 }
                 // 5. の回答
                 Console.WriteLine("\n～問題５の回答～");
@@ -76,17 +75,19 @@ namespace chapter13 {
             }
             Console.ReadLine();
         }
+
         // 全てのBookを読み込み、出力する
         private static void DisplayAllBooks(BooksDbContext vDb) {
             string wNoAuthorMessage = "著書のデータはありません。";
             foreach (Book wBook in vDb.Books) {
                 Console.WriteLine(
                     $"ID：{wBook.Id} タイトル：{wBook.Title}　発行年：{wBook.PublishedYear} " +
-                    $"著者名：{ wBook.Author?.Name ?? wBook.AuthorName } " +
+                    $"著者名：{ wBook.Author.Name } " +
                     $"著書のID：{wBook.Author?.Id.ToString() ?? wNoAuthorMessage} "
                     );
             }
         }
+
         // 全ての著者テーブルを読み込み、出力する
         private static void DisplayAllAuthors(BooksDbContext vDb) {
             foreach (Author wAuthor in vDb.Authors) {
@@ -97,29 +98,37 @@ namespace chapter13 {
                     );
             }
         }
+
         // ブックのリストをDbに追加するメソッド
         private static void AddBookList(List<Book> vBooks) {
-            var wBooks = new List<Book>();
+            var wAddBooksList = new List<Book>();
             using (var wDb = new BooksDbContext()) {
                 foreach (Book wBook in vBooks) {
+                    // 追加するBookのタイトルが既にDBにある場合は、追加しない
                     if (wDb.Books.Any(x => x.Title == wBook.Title)) continue;
-                    wBooks.Add(CheckBook(wDb, wBook));
+                    wAddBooksList.Add(CheckBook(wDb, wBook));
                 }
-                wDb.Books.AddRange(wBooks).Distinct();
+                wDb.Books.AddRange(wAddBooksList).Distinct();
                 wDb.SaveChanges();
             }
         }
-        // Bookをチェックするメソッド
+
+        // 追加するBookのAuthorが既にDBにないかNameでチェックするメソッド
         private static Book CheckBook(BooksDbContext vDb, Book vBook) {
-            string wAuthorName = vBook.Author?.Name ?? vBook.AuthorName;
-            if (vDb.Authors.Any(x => x.Name == wAuthorName)) vBook.Author = vDb.Authors.Single(x => x.Name == wAuthorName);
+            string wAuthorName = vBook.Author.Name;
+            // DBにある場合は、DBのAuthorに置き換える（IDを一致させる）
+            if (vDb.Authors.Any(x => x.Name == wAuthorName)) {
+                vBook.Author = vDb.Authors.Single(x => x.Name == wAuthorName);
+            }
             return vBook;
         }
+
         // 著者リストを追加する
         private static void AddAuthorList(List<Author> vAuthors) {
             var Authors = new List<Author>();
             using (var wDb = new BooksDbContext()) {
                 foreach (Author wAuthor in vAuthors) {
+                    // 追加するAuthorがDbにあるかチェック。ある場合は、追加しない
                     if (wDb.Authors.Any(x => x.Name == wAuthor.Name)) continue;
                     wDb.Authors.Add(wAuthor);
                 }
