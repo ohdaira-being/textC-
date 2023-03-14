@@ -37,12 +37,10 @@ namespace Question16_2 {
             }
             TxtState.Text = "検索中";
             this.Cursor = Cursors.AppStarting;
-            // 並列処理検索と非並列処理検索を、並列処理で行う 
-            Task<(string, string)> wParallelRun = Task.Run(() => ParallelSearchPaths());
-            Task<(string, string)> wNormalRun = Task.Run(() => NormalSearchPaths());
-            (string, string) wParallelText = await wParallelRun;
-            (string, string) wNormalText = await wNormalRun;
-            //TxtResult.Text = wParallelText.Item1;
+            // ファイル取得を非同期にする
+            var wFilePaths = await SearchFiles(); 
+            (string, string) wParallelText = ParallelSearchPaths(wFilePaths);
+            (string, string) wNormalText = NormalSearchPaths(wFilePaths);
             TxtResult.Text = (wParallelText.Item1 != String.Empty) ? wParallelText.Item1 : "検索ワードを含むファイルは、ありませんでした";
             TxtParallelTime.Text = wParallelText.Item2;
             TxtUnParallelTime.Text = wNormalText.Item2;
@@ -51,14 +49,25 @@ namespace Question16_2 {
         }
 
         /// <summary>
+        /// TxtDirectoryPathテキストボックスのディレクトリパス内の.csファイルを取得する
+        /// </summary>
+        /// <returns>.csファイルのリスト</returns>
+        private async Task<List<string>> SearchFiles() {
+            List<string> wPaths = new List<string>();
+            await Task.Run(() => {
+                wPaths = Directory.EnumerateFiles(TxtDirectoryPath.Text, "*.cs", SearchOption.AllDirectories).ToList();
+            });
+            return wPaths;
+        }
+
+        /// <summary>
         /// 並列処理で検索するメソッド
         /// </summary>
         /// <returns>マッチしたパスと処理時間</returns>
-        private (string, string) ParallelSearchPaths() {
+        private (string, string) ParallelSearchPaths(IEnumerable<string> vFilePaths) {
             var wTimer = Stopwatch.StartNew();
             var wSearchedPaths = new StringBuilder();
-            IEnumerable<string> wPaths = Directory.EnumerateFiles(TxtDirectoryPath.Text, "*.cs", SearchOption.AllDirectories);
-            foreach (string wPath in wPaths.AsParallel().Where(x => IsMatchText(x, TxtWord1.Text) && IsMatchText(x, TxtWord2.Text))) {
+            foreach (string wPath in vFilePaths.AsParallel().Where(x => IsMatchText(x, TxtWord1.Text) && IsMatchText(x, TxtWord2.Text))) {
                 wSearchedPaths.AppendLine($"・{wPath}");
             };
             wTimer.Stop();
@@ -69,11 +78,10 @@ namespace Question16_2 {
         /// 非並列処理で検索するメソッド
         /// </summary>
         /// <returns>マッチしたパスと処理時間</returns>
-        private (string, string) NormalSearchPaths() {
+        private (string, string) NormalSearchPaths(IEnumerable<string> vFilePaths) {
             var wTimer = Stopwatch.StartNew();
             var wSearchedPaths = new StringBuilder();
-            IEnumerable<string> wPaths = Directory.EnumerateFiles(TxtDirectoryPath.Text, "*.cs", SearchOption.AllDirectories);
-            foreach (string wPath in wPaths.Where(x => IsMatchText(x, TxtWord1.Text) && IsMatchText(x, TxtWord2.Text))) {
+            foreach (string wPath in vFilePaths.Where(x => IsMatchText(x, TxtWord1.Text) && IsMatchText(x, TxtWord2.Text))) {
                 wSearchedPaths.AppendLine($"・{wPath}\n");
             };
             wTimer.Stop();
