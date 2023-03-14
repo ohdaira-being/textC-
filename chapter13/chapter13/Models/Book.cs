@@ -19,7 +19,7 @@ namespace chapter13.Models {
         /// <summary>
         /// 書籍の発行者プロパティ
         /// </summary>
-        public string Publisher { get; set; }
+        public string AuthorName { get; set; }
 
         /// <summary>
         /// 書籍の発行年プロパティ
@@ -41,12 +41,12 @@ namespace chapter13.Models {
         /// </summary>
         /// <param name="vTitle">書籍のタイトル名</param>
         /// <param name="vPublishedYear">書籍の発行年</param>
-        /// <param name="vPublisher">書籍の著者名</param>
+        /// <param name="AuthorName">書籍の著者名</param>
         /// <param name="vAuthor">書籍の著者情報</param>
-        public Book(string vTitle, int vPublishedYear, string vPublisher, Author vAuthor) {
+        public Book(string vTitle, int vPublishedYear, string AuthorName, Author vAuthor) {
             this.Title = vTitle;
             this.PublishedYear = vPublishedYear;
-            this.Publisher = vPublisher;
+            this.AuthorName = AuthorName;
             this.Author = vAuthor;
         }
     }
