@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -86,5 +87,15 @@ namespace Question16_2 {
         /// <param name="vText">検索ワード</param>
         /// <returns>マッチしたかどうかの真偽</returns>
         private bool IsMatchText(string vPath, string vText) => Regex.IsMatch(File.ReadAllText(vPath, Encoding.UTF8), $@"\b{vText}\b");
+
+        private void TxtDirectoryPath_TextChanged(object sender, EventArgs e) {
+            if (Directory.Exists(TxtDirectoryPath.Text)) {
+                TxtDirectoryPath.ForeColor = Color.Black;
+                BtnSearchFile.Enabled = true;
+            } else {
+                TxtDirectoryPath.ForeColor = Color.Red;
+                BtnSearchFile.Enabled = false;
+            }
+        }
     }
 }

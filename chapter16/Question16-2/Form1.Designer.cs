@@ -58,6 +58,7 @@ namespace Question16_2 {
             // BtnSearchFile
             // 
             this.BtnSearchFile.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnSearchFile.Enabled = false;
             this.BtnSearchFile.Location = new System.Drawing.Point(594, 46);
             this.BtnSearchFile.Name = "BtnSearchFile";
             this.BtnSearchFile.Size = new System.Drawing.Size(133, 53);
@@ -125,6 +126,7 @@ namespace Question16_2 {
             this.TxtDirectoryPath.Name = "TxtDirectoryPath";
             this.TxtDirectoryPath.Size = new System.Drawing.Size(453, 22);
             this.TxtDirectoryPath.TabIndex = 8;
+            this.TxtDirectoryPath.TextChanged += new System.EventHandler(this.TxtDirectoryPath_TextChanged);
             // 
             // LblParallelTime
             // 
