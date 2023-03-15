@@ -11,7 +11,7 @@ namespace Question17_1 {
         private StringBuilder FHankakuText;
 
         /// <summary>
-        /// FHankakuLinesの初期値設定
+        /// FHankakuTextの初期値設定
         /// </summary>
         /// <param name="vFPath">読み込んだ行</param>
         protected override void Initialize(string vFPath) {
@@ -19,7 +19,7 @@ namespace Question17_1 {
         }
 
         /// <summary>
-        /// 半角にしてFHankakuLinesに格納する
+        /// 半角にしてFHankakuTextに格納する
         /// </summary>
         /// <param name="vLine">読み込んだ行</param>
         protected override void Execute(string vLine) => FHankakuText.Append($"{Regex.Replace(vLine, "[０-９]", p => ((char)(p.Value[0] - '０' + '0')).ToString())}\n");

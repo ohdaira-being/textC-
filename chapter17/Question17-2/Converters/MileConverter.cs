@@ -10,16 +10,16 @@
         /// </summary>
         /// <param name="vName">単位名</param>
         /// <returns>マイルかどうか</returns>
-        public override bool IsMyUnit(string vName) => vName.ToLower() == "mile" || vName == UnitName;
+        public override bool IsMyUnit(string vName) => vName.ToLower() == "mile" || vName == this.UnitName;
 
         /// <summary>
         /// メートルとの比率プロパティ
         /// </summary>
-        protected override double Ratio { get { return 1609.344; } }
+        protected override double Ratio => 1609.344;
 
         /// <summary>
         /// 単位名プロパティ
         /// </summary>
-        public override string UnitName { get { return "マイル"; } }
+        public override string UnitName => "マイル";
     }
 }
