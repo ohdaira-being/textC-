@@ -26,17 +26,17 @@ namespace chapter13 {
             Console.WriteLine("初期化しますか？\nYes　　→　　Y\nNo 　　→　　Y以外");
             if (Console.ReadLine() == "Y") InitializeDB();
 
-            Author wSosekiNatsume = new Author("夏目漱石", new DateTime(1867, 2, 9), "男性");
-            Author wOsamuDazai = new Author("太宰治", new DateTime(1909, 6, 19), "男性");
-            Author wAkikoYosano = new Author("与謝野晶子", new DateTime(1878, 12, 7), "女性");
-            Author wKenjiMiyazawa = new Author("宮沢賢治", new DateTime(1896, 8, 27), "男性");
+            var wSosekiNatsume = new Author("夏目漱石", new DateTime(1867, 2, 9), "男性");
+            var wOsamuDazai = new Author("太宰治", new DateTime(1909, 6, 19), "男性");
+            var wAkikoYosano = new Author("与謝野晶子", new DateTime(1878, 12, 7), "女性");
+            var wKenjiMiyazawa = new Author("宮沢賢治", new DateTime(1896, 8, 27), "男性");
 
             // 1. の回答
-            Author wKanKikuchi = new Author("菊池寛", new DateTime(1888, 12, 26), "男性");
-            Author wYasunariKawabata = new Author("川端康成", new DateTime(1899, 6, 14), "男性");
-            List<Author> wAuthors = new List<Author> { wKanKikuchi, wYasunariKawabata };
+            var wKanKikuchi = new Author("菊池寛", new DateTime(1888, 12, 26), "男性");
+            var wYasunariKawabata = new Author("川端康成", new DateTime(1899, 6, 14), "男性");
+            var wAuthors = new List<Author> { wKanKikuchi, wYasunariKawabata };
 
-            List<Book> wBooks = new List<Book>{
+            var wBooks = new List<Book>{
                 new Book("こころ", 1991, wSosekiNatsume),
                 new Book("伊豆の踊子", 2003, wYasunariKawabata),
                 new Book("真珠夫人", 2002, wKanKikuchi),
@@ -53,7 +53,7 @@ namespace chapter13 {
             AddAuthorList(wAuthors);
             AddBookList(wBooks);
 
-            using (BooksDbContext wDb = new BooksDbContext()) {
+            using (var wDb = new BooksDbContext()) {
                 // 2. の回答
                 Console.WriteLine("\n～問題２の回答～");
                 DisplayAllBooks(wDb);
@@ -67,7 +67,7 @@ namespace chapter13 {
                 // 4. の回答
                 Console.WriteLine("\n～問題４の回答～");
                 foreach (Book wBook in wDbBooks.OrderBy(x => x.PublishedYear).Take(3)) {
-                    Console.WriteLine($"タイトル：{wBook.Title}　著者名：{ wBook.Author.Name }");
+                    Console.WriteLine($"タイトル：{wBook.Title}　著者名：{wBook.Author.Name}");
                 }
                 // 5. の回答
                 Console.WriteLine("\n～問題５の回答～");
@@ -88,7 +88,7 @@ namespace chapter13 {
             foreach (Book wBook in vDb.Books) {
                 Console.WriteLine(
                     $"ID：{wBook.Id} タイトル：{wBook.Title}　発行年：{wBook.PublishedYear} " +
-                    $"著者名：{ wBook.Author.Name } " +
+                    $"著者名：{wBook.Author.Name} " +
                     $"著書のID：{wBook.Author?.Id.ToString() ?? wNoAuthorMessage} "
                     );
             }
@@ -109,7 +109,7 @@ namespace chapter13 {
         private static void AddBookList(IReadOnlyCollection<Book> vBooks) {
             var wAddBooksList = new List<Book>();
             try {
-                using (BooksDbContext wDb = new BooksDbContext()) {
+                using (var wDb = new BooksDbContext()) {
                     foreach (Book wBook in vBooks) {
                         // TitleまたはAuthorがnullの場合、例外をスローする
                         if (wBook.Title == null || wBook.Author == null) throw new ArgumentException();
@@ -121,9 +121,9 @@ namespace chapter13 {
                     wDb.SaveChanges();
                 }
             } catch (ArgumentException wBookLackDate) {
-                Console.WriteLine("例外をキャッチしました。（Bookは、TitleとAuthorが必要です。）");
+                Console.WriteLine("追加できませんでした。（書籍情報は、タイトル名と著者情報の入力が必要です。）");
                 Console.WriteLine(wBookLackDate);
-            } 
+            }
         }
 
         // 追加するBookのAuthorが既にDBにないかNameでチェックするメソッド
@@ -138,7 +138,7 @@ namespace chapter13 {
         private static void AddAuthorList(IReadOnlyCollection<Author> vAuthors) {
             List<Author> Authors = new List<Author>();
             try {
-                using (BooksDbContext wDb = new BooksDbContext()) {
+                using (var wDb = new BooksDbContext()) {
                     foreach (Author wAuthor in vAuthors) {
                         // Nameがnullの場合、例外をスローする
                         if (wAuthor.Name == null) throw new ArgumentException();
@@ -149,14 +149,14 @@ namespace chapter13 {
                     wDb.SaveChanges();
                 }
             } catch (ArgumentException wAuthorLackDate) {
-                Console.WriteLine("例外をキャッチしました。（Authorは、Nameが必要です。）");
+                Console.WriteLine("追加できませんでした。（著者情報は、著者名の入力が必要です。）");
                 Console.WriteLine(wAuthorLackDate);
             }
         }
 
         // テーブル初期化
         private static void InitializeDB() {
-            using (BooksDbContext wDb = new BooksDbContext()) {
+            using (var wDb = new BooksDbContext()) {
                 wDb.Books.RemoveRange(wDb.Books);
                 wDb.Authors.RemoveRange(wDb.Authors);
                 wDb.SaveChanges();

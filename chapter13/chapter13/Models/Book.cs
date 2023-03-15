@@ -11,7 +11,7 @@ namespace chapter13.Models {
         public int Id { get; private set; }
 
         /// <summary>
-        /// 書籍のタイトルプロパティ
+        /// 書籍のタイトル名プロパティ
         /// </summary>
         [Required]
         public string Title { get; set; }
@@ -22,7 +22,7 @@ namespace chapter13.Models {
         public int PublishedYear { get; set; }
 
         /// <summary>
-        /// 著者プロパティ
+        /// 著者情報プロパティ
         /// </summary>
         [Required]
         public virtual Author Author { get; set; }
