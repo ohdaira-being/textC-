@@ -14,8 +14,8 @@ namespace Question17_3 {
         /// <summary>
         /// 初期値設定クラス
         /// </summary>
-        /// <param name="vFileName">ファイルパス</param>
-        public void Initialize(string vFileName) => FHankakuText = new StringBuilder();
+        /// <param name="vFilePath">ファイルパス</param>
+        public void Initialize(string vFilePath) => FHankakuText = new StringBuilder();
 
         /// <summary>
         /// 読み込んだ行を半角にする

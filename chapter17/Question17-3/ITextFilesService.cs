@@ -8,8 +8,8 @@
         /// <summary>
         /// 初期状態を決める
         /// </summary>
-        /// <param name="vFname">ァイルパス</param>
-        void Initialize(string vFname);
+        /// <param name="vFPath">ファイルパス</param>
+        void Initialize(string vFPath);
 
         /// <summary>
         /// 読み込み行の処理を決める

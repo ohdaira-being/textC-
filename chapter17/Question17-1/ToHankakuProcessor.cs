@@ -13,8 +13,8 @@ namespace Question17_1 {
         /// <summary>
         /// FHankakuLinesの初期値設定
         /// </summary>
-        /// <param name="vFname">読み込んだ行</param>
-        protected override void Initialize(string vFname) {
+        /// <param name="vFPath">読み込んだ行</param>
+        protected override void Initialize(string vFPath) {
             FHankakuText = new StringBuilder();
         }
 

@@ -18,10 +18,10 @@ namespace Question17_3 {
         /// <summary>
         /// 実行メソッド
         /// </summary>
-        /// <param name="vFileName">ファイルパス</param>
-        public void Run(string vFileName){
-            FService.Initialize(vFileName);
-            using( var wStreamReader = new StreamReader(vFileName)){
+        /// <param name="vFilePath">ファイルパス</param>
+        public void Run(string vFilePath){
+            FService.Initialize(vFilePath);
+            using( var wStreamReader = new StreamReader(vFilePath)){
                 while(!wStreamReader.EndOfStream){
                     string wLine = wStreamReader.ReadLine();
                     FService.Execute(wLine);
