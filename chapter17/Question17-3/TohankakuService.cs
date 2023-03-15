@@ -12,7 +12,7 @@ namespace Question17_3 {
         private StringBuilder FHankakuText;
 
         /// <summary>
-        /// 初期値設定クラス
+        /// FHankakuTextの初期値設定
         /// </summary>
         /// <param name="vFilePath">ファイルパス</param>
         public void Initialize(string vFilePath) => FHankakuText = new StringBuilder();

@@ -3,7 +3,7 @@
 namespace Question17_2 {
 
     /// <summary>
-    /// インスタンス生成クラス
+    /// 距離変換に必要なインスタンスを生成クラス
     /// </summary>
     static class ConverterFactory {
         private static ConverterBase[] FConverters = new ConverterBase[] {
