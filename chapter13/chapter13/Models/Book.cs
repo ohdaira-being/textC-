@@ -24,6 +24,7 @@ namespace chapter13.Models {
         /// <summary>
         /// 著者プロパティ
         /// </summary>
+        [Required]
         public virtual Author Author { get; set; }
 
         /// <summary>
