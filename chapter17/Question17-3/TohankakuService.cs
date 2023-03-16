@@ -7,7 +7,7 @@ namespace Question17_3 {
     /// <summary>
     /// 半角に変換するクラス
     /// </summary>
-    public class TohankakuService : ITextFilesService {
+    public class ToHankakuService : ITextFilesService {
 
         private StringBuilder FHankakuText;
 
