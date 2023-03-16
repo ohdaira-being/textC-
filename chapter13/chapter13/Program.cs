@@ -48,6 +48,10 @@ namespace chapter13 {
                 new Book("銀河鉄道の夜", 1989, wKenjiMiyazawa),
                 new Book("ワン", 2000, wSosekiNatsume),
                 new Book("ワン222", 2000, wSosekiNatsume),
+                new Book("ワンピース", 2000, wSosekiNatsume),
+                new Book("ワンピース", 2000, wAkikoYosano),
+                new Book("ワンピース", 1999, wSosekiNatsume),
+                new Book("ワンピースRED", 2000, wSosekiNatsume),
             };
 
             AddAuthorList(wAuthors);
