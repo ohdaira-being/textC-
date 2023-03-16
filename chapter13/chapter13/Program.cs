@@ -107,17 +107,19 @@ namespace chapter13 {
 
         // ブックのリストをDbに追加するメソッド
         private static void AddBookList(IReadOnlyCollection<Book> vBooks) {
-            var wAddBooksList = new List<Book>();
             try {
                 using (var wDb = new BooksDbContext()) {
                     foreach (Book wBook in vBooks) {
                         // TitleまたはAuthorがnullの場合、例外をスローする
                         if (wBook.Title == null || wBook.Author == null) throw new ArgumentException();
-                        // 追加するBookのタイトルが既にDBにある場合は、追加しない
-                        if (wDb.Books.Any(x => x.Title == wBook.Title)) continue;
-                        wAddBooksList.Add(CheckBook(wDb, wBook));
+                        // 追加するBookのタイトルが既にDBにある場合は、次のループに行く
+                        if (wDb.Books.Any(x => (x.Title == wBook.Title)
+                                               && (x.PublishedYear == wBook.PublishedYear)
+                                               && (x.Author.Name == wBook.Author.Name)
+                                               && (x.Author.Birthday == wBook.Author.Birthday)
+                                               && (x.Author.Gender == wBook.Author.Gender))) continue;
+                        wDb.Books.Add(CheckBook(wDb, wBook));
                     }
-                    wDb.Books.AddRange(wAddBooksList).Distinct();
                     wDb.SaveChanges();
                 }
             } catch (ArgumentException wBookLackDate) {
@@ -128,9 +130,11 @@ namespace chapter13 {
 
         // 追加するBookのAuthorが既にDBにないかNameでチェックするメソッド
         private static Book CheckBook(BooksDbContext vDb, Book vBook) {
-            string wAuthorName = vBook.Author.Name;
+            Author wAuthor = vBook.Author;
             // DBにある場合は、DBのAuthorに置き換える（IDを一致させる）
-            if (vDb.Authors.Any(x => x.Name == wAuthorName)) vBook.Author = vDb.Authors.Single(x => x.Name == wAuthorName);
+            if (vDb.Authors.Any(x => (x.Name == wAuthor.Name)
+                                     && (x.Birthday == wAuthor.Birthday)
+                                     && (x.Gender == wAuthor.Gender))) vBook.Author = vDb.Authors.Single(x => x.Name == wAuthor.Name);
             return vBook;
         }
 
