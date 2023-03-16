@@ -41,13 +41,13 @@ namespace chapter13 {
                 new Book("伊豆の踊子", 2003, wYasunariKawabata),
                 new Book("真珠夫人", 2002, wKanKikuchi),
                 new Book("注文の多い料理店", 2000, wKenjiMiyazawa),
-                new Book("ワンピース", 2000, wSosekiNatsume),
                 new Book("坊ちゃん", 2003, wSosekiNatsume),
                 new Book("人間失格", 1990, wOsamuDazai),
                 new Book("みだれ髪", 2000, wAkikoYosano),
                 new Book("銀河鉄道の夜", 1989, wKenjiMiyazawa),
                 new Book("ワン", 2000, wSosekiNatsume),
                 new Book("ワン222", 2000, wSosekiNatsume),
+                new Book("ワンピース", 2000, wSosekiNatsume),
                 new Book("ワンピース", 2000, wSosekiNatsume),
                 new Book("ワンピース", 2000, wAkikoYosano),
                 new Book("ワンピース", 1999, wSosekiNatsume),
@@ -66,19 +66,19 @@ namespace chapter13 {
                 Console.WriteLine("\n～問題３の回答～");
                 DbSet<Book> wDbBooks = wDb.Books;
                 foreach (Book wBook in wDbBooks) {
-                    if (wBook.Title.Length == wDbBooks.Max(x => x.Title.Length)) Console.WriteLine(wBook.Title);
+                    if (wBook.Title.Length == wDbBooks.Max(x => x.Title.Length)) Console.WriteLine($"{wBook.Id}：{wBook.Title}");
                 }
                 // 4. の回答
                 Console.WriteLine("\n～問題４の回答～");
                 foreach (Book wBook in wDbBooks.OrderBy(x => x.PublishedYear).Take(3)) {
-                    Console.WriteLine($"タイトル：{wBook.Title}　著者名：{wBook.Author.Name}");
+                    Console.WriteLine($"ID：{wBook.Id}　→　「{wBook.Title}」（{wBook.Author.Name}）");
                 }
                 // 5. の回答
                 Console.WriteLine("\n～問題５の回答～");
                 foreach (Author wAuthor in wDb.Authors.OrderBy(x => x.Birthday)) {
-                    Console.WriteLine($"【{wAuthor.Name}】");
+                    Console.WriteLine($"著者【{wAuthor.Name}】");
                     foreach (Book wBook in wDbBooks.Where(x => x.Author.Name == wAuthor.Name)) {
-                        Console.WriteLine($"　・タイトル：{wBook.Title}　発行年：{wBook.PublishedYear}");
+                        Console.WriteLine($"　・ID：{wBook.Id}　→　「{wBook.Title}」（{wBook.PublishedYear}年）");
 
                     }
                 }
@@ -123,8 +123,8 @@ namespace chapter13 {
                                                && (x.Author.Birthday == wBook.Author.Birthday)
                                                && (x.Author.Gender == wBook.Author.Gender))) continue;
                         wDb.Books.Add(CheckBook(wDb, wBook));
+                        wDb.SaveChanges();
                     }
-                    wDb.SaveChanges();
                 }
             } catch (ArgumentException wBookLackDate) {
                 Console.WriteLine("追加できませんでした。（書籍情報は、タイトル名と著者情報の入力が必要です。）");
@@ -153,8 +153,8 @@ namespace chapter13 {
                         // 追加するAuthorがDbにあるかチェック。ある場合は、追加しない
                         if (wDb.Authors.Any(x => x.Name == wAuthor.Name)) continue;
                         wDb.Authors.Add(wAuthor);
+                        wDb.SaveChanges();
                     }
-                    wDb.SaveChanges();
                 }
             } catch (ArgumentException wAuthorLackDate) {
                 Console.WriteLine("追加できませんでした。（著者情報は、著者名の入力が必要です。）");
